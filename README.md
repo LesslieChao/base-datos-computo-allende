@@ -1,2 +1,2 @@
-# base-datos-computo-allende
+# Spazios
 Base documental y de cómputo estructural
