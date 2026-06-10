@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Framework de Produccion de Proyectos - Estacion 01</title>
+<style>
+:root{--bg:#0f1117;--panel:#171b25;--panel2:#202637;--text:#e8ebf2;--muted:#a8b0c2;--line:#343c52;--violet:#8b5cf6;--blue:#38bdf8;--green:#22c55e;--amber:#f59e0b;--red:#ef4444;--soft:#252c3f}*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.45}header{padding:28px 32px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,#151927,#11131b)}h1{margin:0 0 8px;font-size:28px}h2{margin:0 0 16px;font-size:22px}h3{margin:0 0 10px;font-size:17px}p{margin:6px 0;color:var(--muted)}.wrapper{display:grid;grid-template-columns:280px 1fr;min-height:100vh}aside{border-right:1px solid var(--line);padding:22px;background:#111520;position:sticky;top:0;height:100vh}aside a{display:block;color:var(--muted);text-decoration:none;padding:10px 12px;border-radius:10px;margin-bottom:6px}aside a:hover,aside a.active{background:var(--soft);color:var(--text)}main{padding:28px;max-width:1280px}section{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:22px;box-shadow:0 8px 24px rgba(0,0,0,.18)}.grid{display:grid;gap:16px}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.card{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:16px}.kpi{border-left:4px solid var(--violet)}.kpi strong{font-size:24px;display:block}.tag{display:inline-block;padding:4px 8px;border-radius:99px;font-size:12px;margin:2px;background:var(--soft);color:var(--muted)}.tag.green{background:rgba(34,197,94,.13);color:#86efac}.tag.amber{background:rgba(245,158,11,.13);color:#fcd34d}.tag.red{background:rgba(239,68,68,.13);color:#fca5a5}.tag.blue{background:rgba(56,189,248,.13);color:#7dd3fc}table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:12px}th,td{border-bottom:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}th{color:#fff;background:#232a3d}td{color:var(--muted)}button{background:var(--violet);color:white;border:none;border-radius:10px;padding:10px 12px;cursor:pointer}button.secondary{background:var(--soft)}.svg-wrap{overflow:hidden;border:1px solid var(--line);border-radius:16px;background:#0b0e15}svg text{font-family:Arial,Helvetica,sans-serif}.node{fill:#1e2536;stroke:#56607a;stroke-width:1.5}.node.good{stroke:var(--green)}.node.warn{stroke:var(--amber)}.node.gate{stroke:var(--violet);stroke-width:2.4}.node.pending{stroke:var(--blue)}.arrow{stroke:#7b849e;stroke-width:2;marker-end:url(#arrow)}.small{font-size:12px;fill:#a8b0c2}.title{font-size:14px;fill:#fff;font-weight:bold}.note{font-size:11px;fill:#a8b0c2}.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}details{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}summary{cursor:pointer;font-weight:bold}pre{white-space:pre-wrap;background:#0b0e15;border:1px solid var(--line);border-radius:12px;padding:14px;color:#dbe2f1}@media(max-width:900px){.wrapper{grid-template-columns:1fr}aside{position:relative;height:auto}.grid-2,.grid-3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><h1>Framework de Producción de Proyectos</h1><p>Estación 01 · Captura y validación de información base para iniciar Concept</p><p><span class="tag blue">Versión de trabajo</span> <span class="tag amber">Pendiente entrevista Eugenia</span> <span class="tag green">Orientado a bot / asistente operativo</span></p></header>
+<div class="wrapper"><aside><a href="#resumen" class="active">Resumen</a><a href="#flujo">Flujo propuesto</a><a href="#raci">RACI</a><a href="#reglas">Reglas</a><a href="#gate">Gate G01</a><a href="#bot">Modelo bot</a><a href="#entrevista">Entrevista</a></aside><main>
+<section id="resumen"><h2>1. Resumen ejecutivo</h2><div class="grid grid-3"><div class="card kpi"><strong>01</strong><p>Estación de producción definida</p></div><div class="card kpi"><strong>G01</strong><p>Aptitud para iniciar Concept</p></div><div class="card kpi"><strong>4</strong><p>Incertidumbres iniciales a controlar</p></div></div><div class="card" style="margin-top:16px"><h3>Principio de diseño</h3><p>Esta etapa no valida un edificio ni una implantación, porque todavía no existe proyecto. Valida si se conoce lo suficiente la realidad inicial del lote, el negocio y los antecedentes como para comenzar a estructurar Concept con riesgo controlado.</p></div></section>
+<section id="flujo"><h2>2. Flujo propuesto</h2><div class="controls"><button onclick="zoomSvg(1.1)">Zoom +</button><button onclick="zoomSvg(0.9)">Zoom -</button><button class="secondary" onclick="resetSvg()">Reset</button></div><div class="svg-wrap"><svg id="processSvg" viewBox="0 0 1180 430" width="100%" height="430"><defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#7b849e"></path></marker></defs><rect x="40" y="75" width="180" height="95" rx="16" class="node pending"/><text x="60" y="105" class="title">Oficina del desarrollador</text><text x="60" y="130" class="small">Actor origen</text><text x="60" y="150" class="note">No pertenece a DIV4</text><line x1="220" y1="122" x2="300" y2="122" class="arrow"/><rect x="300" y="75" width="190" height="95" rx="16" class="node"/><text x="320" y="105" class="title">Input inicial</text><text x="320" y="130" class="small">Información a validar</text><text x="320" y="150" class="note">Pre Concept</text><line x1="490" y1="122" x2="570" y2="122" class="arrow"/><rect x="570" y="75" width="190" height="95" rx="16" class="node good"/><text x="590" y="105" class="title">Recepción DIV4</text><text x="590" y="130" class="small">R: Eugenia Mayol</text><text x="590" y="150" class="note">Recepción constante</text><line x1="760" y1="122" x2="840" y2="122" class="arrow"/><rect x="840" y="75" width="230" height="95" rx="16" class="node gate"/><text x="860" y="105" class="title">G01 · Aptitud Concept</text><text x="860" y="130" class="small">¿Información suficiente?</text><text x="860" y="150" class="note">No es solo checklist documental</text><line x1="955" y1="170" x2="955" y2="245" class="arrow"/><rect x="820" y="245" width="270" height="95" rx="16" class="node good"/><text x="840" y="275" class="title">Base de Concept Validada</text><text x="840" y="300" class="small">Salida / paquete inicial</text><text x="840" y="320" class="note">Materia prima para Concept</text><path d="M840 122 C700 240 470 240 300 150" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="8 6" marker-end="url(#arrow)"/><text x="470" y="250" class="small" fill="#fca5a5">Si NO cumple: vuelve a oficina del desarrollador</text><rect x="85" y="275" width="210" height="65" rx="12" class="node"/><text x="105" y="305" class="title">Kick off</text><text x="105" y="328" class="note">Pendiente: definir si dispara o formaliza entregables</text><line x1="190" y1="275" x2="350" y2="165" class="arrow"/></svg></div></section>
+<section id="raci"><h2>3. RACI preliminar</h2><table><thead><tr><th>Actividad</th><th>R</th><th>A</th><th>C</th><th>I</th></tr></thead><tbody><tr><td>Entrega de input inicial</td><td>Oficina del desarrollador</td><td>Pendiente definir</td><td>DIV4 / Eugenia</td><td>Proyecto</td></tr><tr><td>Recepción de información</td><td>Eugenia Mayol / DIV4</td><td>Eugenia Mayol</td><td>Oficina del desarrollador</td><td>Proyecto</td></tr><tr><td>Validación de completitud y aptitud inicial</td><td>Eugenia Mayol</td><td>Eugenia Mayol</td><td>Municipal / Proyecto / Estructuras según caso</td><td>Desarrollo / Proyecto</td></tr><tr><td>Corrección de faltantes</td><td>Oficina del desarrollador</td><td>Pendiente definir</td><td>Eugenia Mayol</td><td>Proyecto</td></tr><tr><td>Liberación para iniciar Concept</td><td>Eugenia Mayol</td><td>Eugenia Mayol</td><td>Proyecto / Estructuras según riesgo</td><td>Oficina del desarrollador / Proyecto</td></tr></tbody></table></section>
+<section id="reglas"><h2>4. Reglas e incertidumbres iniciales</h2><div class="grid grid-2"><div class="card"><h3>Agrimensura</h3><p><span class="tag red">Obligatoria</span> No se puede iniciar Concept sin agrimensura.</p><p><b>Qué reduce:</b> incertidumbre sobre la realidad física del lote.</p><p><b>Debe permitir conocer:</b> límites, geometría, ángulos, niveles de vereda, desniveles y elementos que condicionen accesos o gestiones, como árboles u otros obstáculos relevantes.</p></div><div class="card"><h3>Estudio de suelos</h3><p><span class="tag red">Obligatorio</span> Se definió como necesario para Concept.</p><p><b>Qué reduce:</b> incertidumbre sobre estrategia preliminar de fundación y posible impacto económico.</p><p><b>Excepción:</b> prueba de venta contra oferta de compra del lote.</p></div><div class="card"><h3>Documentación preexistente</h3><p><span class="tag amber">Pendiente Eugenia</span></p><p>No se refiere a factibilidades. Se refiere a planchetas, planos municipales previos u otros antecedentes documentales del lote.</p></div><div class="card"><h3>Ficha / input del desarrollador</h3><p><span class="tag amber">A definir en etapas siguientes</span></p><p>Debe aportar información inicial para comenzar a estructurar el negocio: unidades, m² vendibles, objetivos comerciales y restricciones iniciales.</p></div></div></section>
+<section id="gate"><h2>5. Gate G01 · Aptitud para iniciar Concept</h2><details open><summary>Objetivo del gate</summary><p>Determinar si existe información suficiente para iniciar Concept con un nivel de incertidumbre aceptable.</p></details><details open><summary>No valida</summary><p>No valida si el edificio entra en el lote, porque todavía no existe edificio. No valida implantación, tipologías, volumetría ni superficies finales.</p></details><details open><summary>Sí valida</summary><ul><li>Que se conoce la realidad física básica del lote.</li><li>Que existe una base geotécnica suficiente para no iniciar con incertidumbre estructural crítica.</li><li>Que se cuenta con antecedentes documentales disponibles o se conoce su ausencia.</li><li>Que el negocio cuenta con información inicial suficiente para comenzar a estructurarse.</li></ul></details><details><summary>Salida recomendada</summary><p><b>Base de Concept Validada</b> o <b>Input Package V1</b>.</p><p>Debe contener estado de agrimensura, estudio de suelos, documentación preexistente, ficha/input del desarrollador, faltantes, riesgos y observaciones.</p></details></section>
+<section id="bot"><h2>6. Modelo para bot / asistente operativo</h2><pre>{
+  "estacion": "01 - Captura y Validación de Información Base",
+  "gate": "G01 - Aptitud para iniciar Concept",
+  "responsable_operativo": "Eugenia Mayol / DIV4",
+  "actor_origen": "Oficina del desarrollador",
+  "reglas": {
+    "agrimensura": {
+      "obligatoria_para_concept": true,
+      "tipo_i": "Pre demolición",
+      "tipo_ii": "Post demolición",
+      "uso": "Conocer realidad física del lote antes de iniciar Concept"
+    },
+    "estudio_suelos": {
+      "obligatorio_para_concept": true,
+      "excepcion": "Prueba de venta contra oferta de compra del lote",
+      "consulta_tecnica": ["Antonio", "Nahuel"]
+    },
+    "documentacion_preexistente": {
+      "incluye": ["planchetas", "planos municipales previos"],
+      "no_incluye": ["factibilidades"],
+      "pendiente_validacion": true
+    }
+  },
+  "salida": "Base de Concept Validada"
+}</pre></section>
+<section id="entrevista"><h2>7. Entrevista pendiente a Eugenia</h2><p>Preguntas enfocadas únicamente en los puntos que todavía requieren validación de dominio.</p><pre id="plainInterview">ENTREVISTA A EUGENIA · BLOQUE 01 · CAPTURA Y VALIDACIÓN DE INFORMACIÓN BASE
+
+Objetivo:
+Validar los criterios reales de la etapa previa a Concept, especialmente documentación preexistente, validación de información base y reglas de liberación.
+
+1. DOCUMENTACIÓN PREEXISTENTE
+
+1.1. Cuando el flujo menciona "documentación preexistente", ¿qué documentos entran exactamente?
+Ejemplos a confirmar:
+- Planchetas.
+- Planos municipales previos.
+- Expedientes anteriores.
+- Antecedentes del lote.
+- Otros.
+
+1.2. ¿Qué documentación preexistente aporta valor real para iniciar Concept?
+
+1.3. ¿Qué documentación suele recibirse pero rara vez se usa?
+
+1.4. ¿Qué documentación preexistente considerás crítica?
+
+1.5. ¿Qué problemas suelen aparecer cuando esa documentación falta o está desactualizada?
+
+1.6. ¿Cómo determinás si un plano municipal previo o plancheta sigue siendo útil?
+
+2. VALIDACIÓN DE INFORMACIÓN BASE
+
+2.1. Cuando el flujo dice "validación de información base", ¿qué validás realmente?
+
+2.2. ¿Validás solo completitud documental o también evaluás riesgos?
+
+2.3. ¿Qué condiciones mínimas deben cumplirse para liberar el inicio de Concept?
+
+2.4. ¿Qué faltantes bloquean completamente el avance?
+
+2.5. ¿Qué faltantes permiten avanzar con observación o riesgo asumido?
+
+2.6. ¿Existe algún checklist actual, aunque sea informal?
+
+2.7. ¿Dónde queda registrada la validación?
+
+3. AGRIMENSURA
+
+3.1. ¿Qué revisás normalmente cuando recibís la agrimensura?
+
+3.2. ¿Detectás errores técnicos o solo verificás existencia y correspondencia del documento?
+
+3.3. ¿Qué defectos harían que pidas corrección de la agrimensura?
+
+3.4. ¿Qué información de la agrimensura es más importante para iniciar Concept?
+
+4. ESTUDIO DE SUELOS
+
+4.1. ¿Qué revisás normalmente cuando recibís el estudio de suelos?
+
+4.2. ¿Derivás la revisión técnica a Antonio o Nahuel cuando aparecen recomendaciones estructurales relevantes?
+
+4.3. ¿Qué tipo de anomalías o conclusiones del estudio suelen generar alerta?
+
+4.4. ¿Cómo se registra que el estudio fue revisado o aceptado?
+
+5. KICK OFF
+
+5.1. ¿El kick off debería hacerse antes de solicitar la documentación o después de recibirla?
+
+5.2. ¿Quién debería convocarlo?
+
+5.3. ¿Quiénes deberían participar?
+
+5.4. ¿Qué resultado concreto debería dejar el kick off?
+
+6. DECISIÓN DE LIBERACIÓN
+
+6.1. Cuando liberás un proyecto para iniciar Concept, ¿qué estás diciendo exactamente?
+
+6.2. ¿La salida debería llamarse "Base de Concept Validada", "Input Package V1" u otro nombre?
+
+6.3. ¿A quién se informa que el proyecto queda liberado?
+
+6.4. Si el proyecto no queda liberado, ¿cómo se comunica el rechazo o pedido de corrección a la oficina del desarrollador?</pre><button onclick="copyInterview()">Copiar entrevista</button></section>
+</main></div><script>let scale=1;const svg=document.getElementById('processSvg');function zoomSvg(f){scale*=f;const w=1180/scale;const h=430/scale;svg.setAttribute('viewBox',`0 0 ${w} ${h}`)}function resetSvg(){scale=1;svg.setAttribute('viewBox','0 0 1180 430')}function copyInterview(){const text=document.getElementById('plainInterview').innerText;navigator.clipboard.writeText(text).then(()=>{alert('Entrevista copiada al portapapeles')})}document.querySelectorAll('aside a').forEach(a=>{a.addEventListener('click',()=>{document.querySelectorAll('aside a').forEach(x=>x.classList.remove('active'));a.classList.add('active')})});</script></body></html>

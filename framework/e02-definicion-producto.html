@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Framework de Producción de Proyectos - E02 Definición de Producto</title>
+  <style>
+    :root{
+      --bg:#0f1117;
+      --panel:#171b25;
+      --panel2:#202637;
+      --text:#edf0f7;
+      --muted:#a9b2c7;
+      --line:#343c52;
+      --violet:#8b5cf6;
+      --blue:#38bdf8;
+      --green:#22c55e;
+      --amber:#f59e0b;
+      --red:#ef4444;
+      --soft:#252c3f;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.45}
+    header{padding:28px 32px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,#151927,#11131b)}
+    h1{margin:0 0 8px;font-size:28px}
+    h2{margin:0 0 16px;font-size:22px}
+    h3{margin:0 0 10px;font-size:17px}
+    p{margin:6px 0;color:var(--muted)}
+    ul{color:var(--muted)}
+    .wrapper{display:grid;grid-template-columns:285px 1fr;min-height:100vh}
+    aside{border-right:1px solid var(--line);padding:22px;background:#111520;position:sticky;top:0;height:100vh}
+    aside a{display:block;color:var(--muted);text-decoration:none;padding:10px 12px;border-radius:10px;margin-bottom:6px}
+    aside a:hover,aside a.active{background:var(--soft);color:var(--text)}
+    main{padding:28px;max-width:1320px}
+    section{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:22px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+    .grid{display:grid;gap:16px}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .card{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:16px}
+    .kpi{border-left:4px solid var(--violet)}
+    .kpi strong{font-size:24px;display:block}
+    .tag{display:inline-block;padding:4px 8px;border-radius:99px;font-size:12px;margin:2px;background:var(--soft);color:var(--muted)}
+    .tag.green{background:rgba(34,197,94,.13);color:#86efac}
+    .tag.amber{background:rgba(245,158,11,.13);color:#fcd34d}
+    .tag.red{background:rgba(239,68,68,.13);color:#fca5a5}
+    .tag.blue{background:rgba(56,189,248,.13);color:#7dd3fc}
+    table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden}
+    th,td{border-bottom:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}
+    th{color:#fff;background:#232a3d}
+    td{color:var(--muted)}
+    button{background:var(--violet);color:white;border:none;border-radius:10px;padding:10px 12px;cursor:pointer}
+    .svg-wrap{overflow:auto;border:1px solid var(--line);border-radius:16px;background:#0b0e15}
+    svg{min-width:1240px}
+    svg text{font-family:Arial,Helvetica,sans-serif}
+    .node{fill:#1e2536;stroke:#56607a;stroke-width:1.5}
+    .node.good{stroke:var(--green)}
+    .node.warn{stroke:var(--amber)}
+    .node.gate{stroke:var(--violet);stroke-width:2.4}
+    .node.pending{stroke:var(--blue)}
+    .node.danger{stroke:var(--red)}
+    .arrow{stroke:#7b849e;stroke-width:2;marker-end:url(#arrow)}
+    .loop{stroke:#f59e0b;stroke-width:2;fill:none;stroke-dasharray:8 6;marker-end:url(#arrowAmber)}
+    .small{font-size:12px;fill:#a8b0c2}
+    .title{font-size:14px;fill:#fff;font-weight:bold}
+    .note{font-size:11px;fill:#a8b0c2}
+    details{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+    summary{cursor:pointer;font-weight:bold}
+    pre{white-space:pre-wrap;background:#0b0e15;border:1px solid var(--line);border-radius:12px;padding:14px;color:#dbe2f1}
+    @media(max-width:900px){
+      .wrapper{grid-template-columns:1fr}
+      aside{position:relative;height:auto}
+      .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Framework de Producción de Proyectos</h1>
+  <p>E02 · Definición de Producto</p>
+  <p>
+    <span class="tag blue">Versión integrada</span>
+    <span class="tag amber">Hipótesis pendientes de validar</span>
+    <span class="tag green">Orientado a bot / asistente operativo</span>
+  </p>
+</header>
+
+<div class="wrapper">
+<aside>
+  <a href="#resumen" class="active">Resumen</a>
+  <a href="#flujo">Flujo integrado</a>
+  <a href="#subetapas">Subetapas</a>
+  <a href="#gates">Gates</a>
+  <a href="#comercial-financiero">Comercial / Financiero</a>
+  <a href="#raci">RACI</a>
+  <a href="#oportunidades">Oportunidades</a>
+  <a href="#preguntas">Preguntas pendientes</a>
+  <a href="#bot">Modelo bot</a>
+</aside>
+
+<main>
+
+<section id="resumen">
+  <h2>1. Resumen ejecutivo</h2>
+  <div class="grid grid-4">
+    <div class="card kpi"><strong>E02</strong><p>Definición de Producto</p></div>
+    <div class="card kpi"><strong>G02</strong><p>Validación preliminar de viabilidad</p></div>
+    <div class="card kpi"><strong>G02A</strong><p>Preselección interna Dirección DIV4</p></div>
+    <div class="card kpi"><strong>G03</strong><p>Validación Comercial de Producto</p></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <h3>Objetivo de la estación</h3>
+    <p>Transformar los objetivos del negocio, la información validada del lote, las restricciones normativas y el potencial edificable preliminar en un producto inmobiliario conceptual validado.</p>
+    <p>La estación integra dos momentos que no deben separarse en estaciones distintas: primero se determina el potencial del lote y luego se exploran, filtran y validan alternativas de producto.</p>
+  </div>
+</section>
+
+<section id="flujo">
+  <h2>2. Flujo integrado de la Estación 02</h2>
+  <div class="svg-wrap">
+    <svg viewBox="0 0 1380 680" width="100%" height="680">
+      <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L0,6 L9,3 z" fill="#7b849e"></path>
+        </marker>
+        <marker id="arrowAmber" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L0,6 L9,3 z" fill="#f59e0b"></path>
+        </marker>
+      </defs>
+
+      <rect x="40" y="85" width="210" height="95" rx="16" class="node good"/>
+      <text x="60" y="115" class="title">Base Concept Validada</text>
+      <text x="60" y="140" class="small">Salida de E01</text>
+      <text x="60" y="160" class="note">Información inicial confiable</text>
+
+      <line x1="250" y1="133" x2="310" y2="133" class="arrow"/>
+
+      <rect x="310" y="80" width="220" height="110" rx="16" class="node"/>
+      <text x="330" y="110" class="title">E02.01</text>
+      <text x="330" y="132" class="title">Caracterización urbanística</text>
+      <text x="330" y="158" class="small">FOT/FOS · alturas · retiros</text>
+      <text x="330" y="178" class="note">R: Eugenia</text>
+
+      <line x1="530" y1="135" x2="590" y2="135" class="arrow"/>
+
+      <rect x="590" y="80" width="230" height="110" rx="16" class="node pending"/>
+      <text x="610" y="110" class="title">E02.02</text>
+      <text x="610" y="132" class="title">Potencial edificable</text>
+      <text x="610" y="158" class="small">m² · niveles · vendible</text>
+      <text x="610" y="178" class="note">Hipótesis: Revit / iteración</text>
+
+      <line x1="820" y1="135" x2="880" y2="135" class="arrow"/>
+
+      <rect x="880" y="80" width="230" height="110" rx="16" class="node gate"/>
+      <text x="900" y="110" class="title">G02 · Viabilidad</text>
+      <text x="900" y="132" class="title">preliminar</text>
+      <text x="900" y="158" class="small">¿El potencial permite</text>
+      <text x="900" y="178" class="small">perseguir el negocio?</text>
+
+      <path d="M995 190 L995 245 L705 245 L705 190" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="8 6" marker-end="url(#arrow)"/>
+      <text x="755" y="238" class="small" fill="#fca5a5">Si NO: replanteo del pre concept / negocio</text>
+
+      <line x1="1110" y1="135" x2="1165" y2="135" class="arrow"/>
+
+      <rect x="1165" y="65" width="185" height="135" rx="16" class="node warn"/>
+      <text x="1185" y="95" class="title">E02.03</text>
+      <text x="1185" y="117" class="title">Alternativas</text>
+      <text x="1185" y="145" class="small">Implantación A/B/C</text>
+      <text x="1185" y="165" class="small">Volumetría A/B/C</text>
+      <text x="1185" y="185" class="note">Masa · patios · retiros</text>
+
+      <line x1="1258" y1="200" x2="1258" y2="270" class="arrow"/>
+
+      <rect x="1115" y="270" width="285" height="125" rx="16" class="node gate"/>
+      <text x="1135" y="300" class="title">G02A · Preselección interna</text>
+      <text x="1135" y="325" class="small">Eugenia + Dirección DIV4</text>
+      <text x="1135" y="347" class="small">Filtra alternativas</text>
+      <text x="1135" y="367" class="note">Puede dejar 1 o más candidatas</text>
+
+      <line x1="1115" y1="332" x2="1010" y2="332" class="arrow"/>
+
+      <rect x="750" y="270" width="260" height="125" rx="16" class="node"/>
+      <text x="770" y="300" class="title">E02.04</text>
+      <text x="770" y="322" class="title">Desarrollo de candidata/s</text>
+      <text x="770" y="350" class="small">Esquema funcional</text>
+      <text x="770" y="370" class="small">Mix preliminar</text>
+
+      <line x1="750" y1="332" x2="640" y2="332" class="arrow"/>
+
+      <rect x="380" y="270" width="260" height="125" rx="16" class="node gate"/>
+      <text x="400" y="300" class="title">G03 · Validación Comercial</text>
+      <text x="400" y="322" class="title">de Producto</text>
+      <text x="400" y="350" class="small">Mercado · mix · ticket</text>
+      <text x="400" y="370" class="small">eficiencia · posicionamiento</text>
+
+      <line x1="380" y1="332" x2="270" y2="332" class="arrow"/>
+
+      <rect x="40" y="270" width="230" height="125" rx="16" class="node good"/>
+      <text x="60" y="300" class="title">Producto Inmobiliario</text>
+      <text x="60" y="322" class="title">Conceptual Validado</text>
+      <text x="60" y="350" class="small">Salida de E02</text>
+      <text x="60" y="370" class="note">Avanza a próxima etapa</text>
+
+      <path d="M510 395 C510 505 880 505 880 395" class="loop"/>
+      <text x="590" y="500" class="small" fill="#fcd34d">Ajustes: vuelve a esquema funcional / mix</text>
+
+      <path d="M510 270 C530 215 1230 220 1258 270" class="loop"/>
+      <text x="790" y="220" class="small" fill="#fcd34d">Reformulación: vuelve a alternativas</text>
+
+      <path d="M1258 395 C1285 500 1170 555 880 395" class="loop"/>
+      <text x="1000" y="555" class="small" fill="#fcd34d">Nueva ronda con alternativas preseleccionadas</text>
+    </svg>
+  </div>
+</section>
+
+<section id="subetapas">
+  <h2>3. Subetapas integradas</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>E02.01 · Caracterización Urbanística</h3>
+      <p><b>Responsable:</b> Eugenia · Desarrollo de Producto.</p>
+      <p><b>Inputs:</b> agrimensura, planchetas, planos municipales previos, normativa vigente.</p>
+      <p><b>Output:</b> perfil urbanístico del lote.</p>
+      <ul>
+        <li>FOT / FOS.</li>
+        <li>Alturas.</li>
+        <li>Retiros.</li>
+        <li>Usos permitidos.</li>
+        <li>Restricciones.</li>
+        <li>Afectaciones.</li>
+      </ul>
+      <p><span class="tag amber">Pendiente</span> Definir dónde queda registrada esta información.</p>
+    </div>
+
+    <div class="card">
+      <h3>E02.02 · Estimación de Potencial Edificable</h3>
+      <p><b>Responsable:</b> Eugenia.</p>
+      <p><b>Apoyo eventual:</b> asesor externo en casos especiales.</p>
+      <p><b>Inputs:</b> perfil urbanístico, ficha desarrollador, estudio de suelos.</p>
+      <p><b>Output esperado:</b></p>
+      <ul>
+        <li>m² posibles.</li>
+        <li>Capacidad volumétrica.</li>
+        <li>Ocupación vs altura.</li>
+        <li>Niveles preliminares.</li>
+        <li>Superficie vendible estimada.</li>
+      </ul>
+      <p><span class="tag blue">Hipótesis</span> Puede realizarse mediante modelo conceptual en Revit, armando regiones/unidades potenciales e iterando hasta acercarse al requerimiento de negocio.</p>
+    </div>
+
+    <div class="card">
+      <h3>E02.03 · Exploración de Alternativas</h3>
+      <p>Se generan normalmente varias alternativas de implantación y volumetría conceptual.</p>
+      <ul>
+        <li>Implantación.</li>
+        <li>Ocupación del lote.</li>
+        <li>Posicionamiento del edificio.</li>
+        <li>Orientación.</li>
+        <li>Condiciones del entorno.</li>
+        <li>Masa edificada.</li>
+        <li>Alturas aplicadas.</li>
+        <li>Vacíos y patios.</li>
+        <li>Retiros.</li>
+        <li>Volumetría vs normativa.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>E02.04 · Desarrollo de Candidata/s</h3>
+      <p>Luego de la preselección interna, se profundizan una o más alternativas candidatas.</p>
+      <ul>
+        <li>Esquema funcional.</li>
+        <li>Núcleos verticales.</li>
+        <li>Circulaciones principales.</li>
+        <li>Organización de plantas.</li>
+        <li>Criterios de repetición.</li>
+        <li>Mix de unidades.</li>
+        <li>Tipologías preliminares.</li>
+        <li>Eficiencia de planta.</li>
+        <li>Relación m² vendibles / m² construidos.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="gates">
+  <h2>4. Gates y decisiones</h2>
+  <div class="grid grid-3">
+    <div class="card">
+      <h3>G02 · Validación preliminar de viabilidad</h3>
+      <p><b>Pregunta:</b> ¿El potencial del lote permite perseguir el objetivo de negocio planteado por la ficha desarrollador?</p>
+      <p><b>No valida:</b> rentabilidad final, proyecto arquitectónico cerrado, coordinación interdisciplinaria ni documentación ejecutiva.</p>
+      <p><b>Salida:</b> Concept preliminar viable o replanteo del pre concept / negocio.</p>
+    </div>
+
+    <div class="card">
+      <h3>G02A · Preselección Interna</h3>
+      <p><span class="tag blue">Gate incorporado</span></p>
+      <p><b>Participan:</b> Eugenia + Dirección DIV4.</p>
+      <p><b>Pregunta:</b> ¿Qué alternativas tienen suficiente potencial para seguir invirtiendo tiempo de desarrollo?</p>
+      <p><b>Resultado:</b> alternativas descartadas, alternativas candidatas o pedido de reformulación.</p>
+    </div>
+
+    <div class="card">
+      <h3>G03 · Validación Comercial de Producto</h3>
+      <p><span class="tag green">Nombre definido</span></p>
+      <p><b>Pregunta:</b> ¿El producto propuesto es comercialmente defendible?</p>
+      <p><b>Resultado:</b> aprobado, ajustar, reformular o rechazo total.</p>
+    </div>
+  </div>
+</section>
+
+<section id="comercial-financiero">
+  <h2>5. Preguntas que deben resolver Comercial y Financiero</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Validación Comercial de Producto</h3>
+      <p>Comercial no valida normativa ni fundaciones. Valida si el producto inmobiliario puede venderse de forma coherente con el mercado y el posicionamiento.</p>
+      <ul>
+        <li>¿El producto tiene mercado?</li>
+        <li>¿Es coherente con el barrio y el público objetivo?</li>
+        <li>¿Las tipologías son correctas?</li>
+        <li>¿El mix es adecuado?</li>
+        <li>¿Falta algún producto o sobra alguna tipología?</li>
+        <li>¿Los m² promedio por unidad son correctos?</li>
+        <li>¿El ticket objetivo es alcanzable?</li>
+        <li>¿El producto es comercializable?</li>
+        <li>¿La eficiencia vendible/construido es aceptable desde el producto?</li>
+        <li>¿El producto es coherente con el posicionamiento del desarrollo?</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Validación Financiera / Negocio</h3>
+      <p>Financiero o negocio debe revisar si la alternativa es viable como operación, no solamente si es vendible.</p>
+      <ul>
+        <li>¿La superficie vendible estimada permite sostener el negocio?</li>
+        <li>¿La relación m² vendibles / m² construidos es razonable?</li>
+        <li>¿La altura, volumetría o subsuelos generan costos que comprometen la ecuación?</li>
+        <li>¿El tipo de fundación probable impacta de forma crítica en el margen?</li>
+        <li>¿El ticket de venta previsto alcanza para cubrir el costo objetivo?</li>
+        <li>¿La alternativa permite cumplir el presupuesto objetivo?</li>
+        <li>¿La alternativa sostiene la rentabilidad esperada?</li>
+        <li>¿Existen riesgos económicos relevantes por normativa, suelo, morfología o constructibilidad?</li>
+        <li>¿Conviene seguir invirtiendo tiempo de desarrollo en esta alternativa?</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="raci">
+  <h2>6. RACI preliminar</h2>
+  <table>
+    <thead>
+      <tr><th>Actividad</th><th>R</th><th>A</th><th>C</th><th>I</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Caracterización urbanística</td><td>Eugenia / Desarrollo de Producto</td><td>Eugenia</td><td>Asesor externo si aplica</td><td>Oficina del desarrollador / Proyecto</td></tr>
+      <tr><td>Estimación de potencial edificable</td><td>Eugenia</td><td>Eugenia</td><td>Asesor externo / estructuras según caso</td><td>Oficina del desarrollador / Proyecto</td></tr>
+      <tr><td>G02 Validación preliminar de viabilidad</td><td>Eugenia</td><td>Pendiente confirmar</td><td>Oficina del desarrollador / Dirección / asesor externo según caso</td><td>Proyecto</td></tr>
+      <tr><td>Generación de alternativas</td><td>Eugenia / Desarrollo de Producto</td><td>Pendiente confirmar</td><td>Dirección DIV4</td><td>Proyecto</td></tr>
+      <tr><td>G02A Preselección interna</td><td>Eugenia + Dirección DIV4</td><td>Dirección DIV4</td><td>Eugenia</td><td>Proyecto / Comercial si corresponde</td></tr>
+      <tr><td>Esquema funcional y mix preliminar</td><td>Desarrollo de Producto</td><td>Pendiente confirmar</td><td>Dirección DIV4</td><td>Comercial / Proyecto</td></tr>
+      <tr><td>G03 Validación Comercial de Producto</td><td>Comercial</td><td>Pendiente confirmar</td><td>Desarrollo de Producto / Dirección DIV4 / Financiero</td><td>Proyecto</td></tr>
+      <tr><td>Validación financiera / negocio</td><td>Pendiente confirmar</td><td>Pendiente confirmar</td><td>Desarrollo de Producto / Comercial</td><td>Dirección / Proyecto</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="oportunidades">
+  <h2>7. Oportunidades detectadas</h2>
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Oportunidad</th><th>Estado</th><th>Impacto local</th><th>Impacto sistémico</th><th>Notas</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>O01</td>
+        <td>Participación temprana de Comercial</td>
+        <td>Exploración</td>
+        <td>Alto</td>
+        <td>Bajo-Medio</td>
+        <td>Puede reducir retrabajos dentro de E02, pero no necesariamente modifica el Framework completo.</td>
+      </tr>
+      <tr>
+        <td>O02</td>
+        <td>Registro formal de Potencial Edificable</td>
+        <td>Exploración</td>
+        <td>Alto</td>
+        <td>Alto</td>
+        <td>Si hoy no existe un artefacto formal, impacta trazabilidad, auditoría, comparación entre proyectos y uso futuro de IA.</td>
+      </tr>
+      <tr>
+        <td>O03</td>
+        <td>Versionado de alternativas</td>
+        <td>Exploración</td>
+        <td>Alto</td>
+        <td>Medio</td>
+        <td>Permite distinguir A v1, A v2, B v1, etc., con observaciones y decisiones asociadas.</td>
+      </tr>
+      <tr>
+        <td>O04</td>
+        <td>Formalización de G02A</td>
+        <td>Propuesta</td>
+        <td>Alto</td>
+        <td>Medio</td>
+        <td>Hace explícita la decisión de Dirección DIV4 antes de invertir más tiempo en una alternativa.</td>
+      </tr>
+      <tr>
+        <td>O05</td>
+        <td>Separar validación comercial de validación financiera</td>
+        <td>Exploración</td>
+        <td>Medio-Alto</td>
+        <td>Medio</td>
+        <td>Evita confundir vendibilidad del producto con viabilidad económica del negocio.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="preguntas">
+  <h2>8. Preguntas pendientes integradas</h2>
+  <pre id="plainQuestions">PREGUNTAS PENDIENTES · E02 · DEFINICIÓN DE PRODUCTO
+
+1. CARACTERIZACIÓN URBANÍSTICA
+
+1.1. ¿Cómo determinás actualmente los parámetros normativos del lote?
+1.2. ¿Qué fuentes consultás?
+1.3. ¿Qué información queda registrada?
+1.4. ¿Dónde queda registrada?
+1.5. ¿Ese registro es una planilla, informe, modelo, anotación o comunicación informal?
+1.6. ¿Quién consume después esa información?
+
+2. CAPACIDAD CONSTRUCTIVA PRELIMINAR
+
+2.1. ¿Cómo calculás actualmente la capacidad constructiva preliminar?
+2.2. ¿Utilizás únicamente cálculos normativos o construís un modelo conceptual?
+2.3. Si construís un modelo, ¿usás Revit, CAD, SketchUp u otra herramienta?
+2.4. ¿Armás regiones, masas, niveles o unidades potenciales para aproximarte al objetivo de negocio?
+2.5. ¿Cuántas iteraciones suele requerir un lote promedio?
+2.6. ¿Qué datos obtenés al finalizar?
+2.7. ¿Qué documento, archivo, planilla, modelo o registro queda generado como evidencia?
+2.8. ¿Dónde queda almacenado?
+2.9. ¿Quién utiliza esa información después?
+
+3. VALIDACIÓN PRELIMINAR DE VIABILIDAD · G02
+
+3.1. ¿Qué significa que la viabilidad preliminar dé SI?
+3.2. ¿Qué significa que dé NO?
+3.3. ¿Qué condición hace que el lote no sea viable en esta instancia?
+3.4. Cuando da NO, ¿se modifica el negocio, el producto, la volumetría, la implantación o se descarta el lote?
+3.5. ¿Quién participa en esa decisión?
+3.6. ¿Quién aprueba finalmente la viabilidad preliminar?
+
+4. ALTERNATIVAS
+
+4.1. ¿Cuántas alternativas se generan normalmente?
+4.2. ¿Las alternativas quedan documentadas?
+4.3. ¿Se versionan las alternativas?
+4.4. ¿Qué datos mínimos se registran por alternativa?
+4.5. ¿Pueden reformularse alternativas A y B para una segunda ronda?
+4.6. ¿Cómo se registra la evolución A v1, A v2, B v1, B v2?
+
+5. PRESELECCIÓN INTERNA · DIRECCIÓN DIV4 · G02A
+
+5.1. ¿La preselección la realiza Eugenia sola o Eugenia + Dirección DIV4?
+5.2. ¿Qué criterios utiliza Dirección DIV4 para filtrar alternativas?
+5.3. ¿Pueden seguir una o más alternativas después de esta revisión?
+5.4. ¿Las alternativas descartadas quedan registradas?
+5.5. ¿Qué salida concreta deja esta preselección?
+
+6. VALIDACIÓN COMERCIAL DE PRODUCTO · G03
+
+6.1. ¿Comercial recibe una única alternativa o más de una candidata?
+6.2. ¿Qué información necesita Comercial para evaluar?
+6.3. ¿Qué indicadores revisa Comercial?
+6.4. ¿Qué causa una aprobación?
+6.5. ¿Qué causa un pedido de ajuste?
+6.6. ¿Qué causa una reformulación completa?
+6.7. ¿Qué causa un rechazo total?
+6.8. ¿Quién tiene la decisión final si Comercial y Desarrollo de Producto no coinciden?
+
+7. VALIDACIÓN FINANCIERA / NEGOCIO
+
+7.1. ¿Quién valida la ecuación económica preliminar?
+7.2. ¿Financiero participa en esta etapa o más adelante?
+7.3. ¿Qué indicadores mínimos revisa?
+7.4. ¿Existe una rentabilidad objetivo?
+7.5. ¿Existe un costo objetivo?
+7.6. ¿El ticket de venta objetivo se cruza contra costo estimado?
+7.7. ¿Qué condición económica puede bloquear una alternativa aunque sea vendible?
+7.8. ¿Quién aprueba seguir invirtiendo tiempo de desarrollo desde el punto de vista económico?
+
+8. SALIDA DE LA ESTACIÓN
+
+8.1. Cuando esta etapa finaliza, ¿qué recibe el siguiente actor del proceso?
+8.2. ¿La salida debería ser una ficha de producto conceptual, un modelo conceptual, un informe de viabilidad o una combinación?
+8.3. ¿Qué información mínima debería contener para que Proyecto pueda avanzar sin reinterpretar todo desde cero?</pre>
+  <button onclick="copyQuestions()">Copiar preguntas</button>
+</section>
+
+<section id="bot">
+  <h2>9. Modelo para bot / asistente operativo</h2>
+  <pre>{
+  "estacion": "E02 - Definición de Producto",
+  "objetivo": "Transformar información validada, potencial edificable y objetivos de negocio en producto inmobiliario conceptual validado",
+  "responsable_principal": "Eugenia / Desarrollo de Producto",
+  "salida": "Producto Inmobiliario Conceptual Validado",
+  "subetapas": {
+    "E02.01": "Caracterización Urbanística",
+    "E02.02": "Estimación de Potencial Edificable",
+    "G02": "Validación preliminar de viabilidad",
+    "E02.03": "Exploración de Alternativas",
+    "G02A": "Preselección Interna Dirección DIV4",
+    "E02.04": "Desarrollo de Candidata/s",
+    "G03": "Validación Comercial de Producto"
+  },
+  "objeto_principal": {
+    "tipo": "Alternativa Conceptual",
+    "atributos": [
+      "id_alternativa",
+      "version",
+      "estado",
+      "implantacion",
+      "volumetria",
+      "m2_posibles",
+      "m2_vendibles",
+      "niveles",
+      "eficiencia",
+      "mix",
+      "ticket_objetivo",
+      "observaciones_comerciales",
+      "observaciones_financieras",
+      "decision"
+    ]
+  },
+  "preguntas_comercial": [
+    "¿El producto tiene mercado?",
+    "¿El mix es adecuado?",
+    "¿El ticket objetivo es alcanzable?",
+    "¿La eficiencia es aceptable?",
+    "¿El producto es coherente con el posicionamiento?"
+  ],
+  "preguntas_financiero": [
+    "¿La superficie vendible sostiene el negocio?",
+    "¿El costo probable compromete la ecuación?",
+    "¿La alternativa cumple presupuesto objetivo?",
+    "¿La rentabilidad esperada es alcanzable?"
+  ],
+  "oportunidades": {
+    "O01": "Participación temprana de Comercial",
+    "O02": "Registro formal de Potencial Edificable",
+    "O03": "Versionado de alternativas",
+    "O04": "Formalización de G02A",
+    "O05": "Separar validación comercial de validación financiera"
+  }
+}</pre>
+</section>
+
+</main>
+</div>
+
+<script>
+function copyQuestions(){
+  const text = document.getElementById('plainQuestions').innerText;
+  navigator.clipboard.writeText(text).then(()=>alert('Preguntas copiadas al portapapeles'));
+}
+document.querySelectorAll('aside a').forEach(a=>{
+  a.addEventListener('click',()=>{
+    document.querySelectorAll('aside a').forEach(x=>x.classList.remove('active'));
+    a.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
