@@ -131,7 +131,7 @@
 
 </aside>
 <main>
-<div class="editable-panel editor-panel"><h3>Identificación de edición</h3><p>Completá este campo para que Google Sheets registre quién hizo la última edición en <b>updated_by</b>. No es automático porque la página se ejecuta desde GitHub Pages.</p><div class="form-grid"><div class="field"><label for="editorName">Editor / responsable</label><input id="editorName" placeholder="Ej.: Nahuel / Eugenia / Dirección"></div><div class="field"><label>Estado de sincronización</label><span id="globalSaveState" class="save-state"></span></div></div></div>
+<div class="editable-panel editor-panel"><h3>Responsable de edición</h3><div class="form-grid"><div class="field"><label for="editorName">Responsable</label><input id="editorName" placeholder="Nombre del responsable"></div><div class="field"><label>Estado de sincronización</label><span id="globalSaveState" class="save-state"></span></div></div></div>
 
 <section id="resumen">
 <h2>1. Resumen ejecutivo</h2>
@@ -404,7 +404,7 @@
 <tbody id="raciEditableBody"></tbody>
 </table>
 </div>
-<div class="help-box">El guardado es local del navegador. Para edición multiusuario real, esta misma estructura se puede conectar después a Sheets, Supabase, Firebase o una API propia.</div>
+<div class="help-box">El guardado queda sincronizado con Google Sheets. La página envía automáticamente solo los campos modificados para conservar el responsable real de cada entrada.</div>
 </div>
 </section>
 <section id="oportunidades">
@@ -464,7 +464,7 @@
 </div>
 </section>
 <section id="incognitas"><h2>8. Incógnitas abiertas</h2>
-<p class="section-kicker">Cada pregunta funciona como campo de respuesta. El contenido se guarda localmente en el navegador y puede exportarse en JSON.</p>
+<p class="section-kicker">Cada pregunta funciona como campo de respuesta. Cada campo se autoguarda localmente y se sincroniza con Google Sheets sin pisar los responsables de campos no modificados.</p>
 <div class="right-tools"><button class="secondary" onclick="exportAnswersJson()">Exportar respuestas</button><span class="save-state" id="answersSaveState"></span></div>
 <div class="question-group"><h3>1. Caracterización Urbanística</h3><div class="question"><p>1.1. ¿Cómo determinás actualmente los parámetros normativos del lote?</p><textarea class="answer-box answer" data-save-key="q_1_1" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>1.2. ¿Qué fuentes consultás?</p><textarea class="answer-box answer" data-save-key="q_1_2" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>1.3. ¿Qué información queda registrada?</p><textarea class="answer-box answer" data-save-key="q_1_3" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>1.4. ¿Dónde queda registrada?</p><textarea class="answer-box answer" data-save-key="q_1_4" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>1.5. ¿Ese registro es una planilla, informe, modelo, anotación o comunicación informal?</p><textarea class="answer-box answer" data-save-key="q_1_5" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>1.6. ¿Quién consume después esa información?</p><textarea class="answer-box answer" data-save-key="q_1_6" placeholder="Respuesta / criterio..."></textarea></div></div><div class="question-group"><h3>2. Capacidad Constructiva Preliminar</h3><div class="question"><p>2.1. ¿Cómo calculás actualmente la capacidad constructiva preliminar?</p><textarea class="answer-box answer" data-save-key="q_2_1" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>2.2. ¿Utilizás únicamente cálculos normativos o construís un modelo conceptual?</p><textarea class="answer-box answer" data-save-key="q_2_2" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>2.3. Si construís un modelo, ¿usás Revit, CAD, SketchUp u otra herramienta?</p><textarea class="answer-box answer" data-save-key="q_2_3" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>2.4. ¿Armás regiones, masas, niveles o unidades potenciales para aproximarte al objetivo de negocio?</p><textarea class="answer-box answer" data-save-key="q_2_4" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>2.5. ¿Cuántas iteraciones suele requerir un lote promedio?</p><textarea class="answer-box answer" data-save-key="q_2_5" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>2.6. ¿Qué datos obtenés al finalizar?</p><textarea class="answer-box answer" data-save-key="q_2_6" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>2.7. ¿Qué documento, archivo, planilla, modelo o registro queda generado como evidencia?</p><textarea class="answer-box answer" data-save-key="q_2_7" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>2.8. ¿Dónde queda almacenado?</p><textarea class="answer-box answer" data-save-key="q_2_8" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>2.9. ¿Quién utiliza esa información después?</p><textarea class="answer-box answer" data-save-key="q_2_9" placeholder="Respuesta / criterio..."></textarea></div></div><div class="question-group"><h3>3. Validación Preliminar De Viabilidad · G02</h3><div class="question"><p>3.1. ¿Qué significa que la viabilidad preliminar dé SI?</p><textarea class="answer-box answer" data-save-key="q_3_1" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>3.2. ¿Qué significa que dé NO?</p><textarea class="answer-box answer" data-save-key="q_3_2" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>3.3. ¿Qué condición hace que el lote no sea viable en esta instancia?</p><textarea class="answer-box answer" data-save-key="q_3_3" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>3.4. Cuando da NO, ¿se modifica el negocio, el producto, la volumetría, la implantación o se descarta el lote?</p><textarea class="answer-box answer" data-save-key="q_3_4" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>3.5. ¿Quién participa en esa decisión?</p><textarea class="answer-box answer" data-save-key="q_3_5" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>3.6. ¿Quién aprueba finalmente la viabilidad preliminar?</p><textarea class="answer-box answer" data-save-key="q_3_6" placeholder="Respuesta / criterio..."></textarea></div></div><div class="question-group"><h3>4. Alternativas</h3><div class="question"><p>4.1. ¿Cuántas alternativas se generan normalmente?</p><textarea class="answer-box answer" data-save-key="q_4_1" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>4.2. ¿Las alternativas quedan documentadas?</p><textarea class="answer-box answer" data-save-key="q_4_2" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>4.3. ¿Se versionan las alternativas?</p><textarea class="answer-box answer" data-save-key="q_4_3" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>4.4. ¿Qué datos mínimos se registran por alternativa?</p><textarea class="answer-box answer" data-save-key="q_4_4" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>4.5. ¿Pueden reformularse alternativas A y B para una segunda ronda?</p><textarea class="answer-box answer" data-save-key="q_4_5" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>4.6. ¿Cómo se registra la evolución A v1, A v2, B v1, B v2?</p><textarea class="answer-box answer" data-save-key="q_4_6" placeholder="Respuesta / criterio..."></textarea></div></div><div class="question-group"><h3>5. Preselección Interna · Dirección Div4 · G02A</h3><div class="question"><p>5.1. ¿La preselección la realiza Eugenia sola o Eugenia + Dirección DIV4?</p><textarea class="answer-box answer" data-save-key="q_5_1" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>5.2. ¿Qué criterios utiliza Dirección DIV4 para filtrar alternativas?</p><textarea class="answer-box answer" data-save-key="q_5_2" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>5.3. ¿Pueden seguir una o más alternativas después de esta revisión?</p><textarea class="answer-box answer" data-save-key="q_5_3" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>5.4. ¿Las alternativas descartadas quedan registradas?</p><textarea class="answer-box answer" data-save-key="q_5_4" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>5.5. ¿Qué salida concreta deja esta preselección?</p><textarea class="answer-box answer" data-save-key="q_5_5" placeholder="Respuesta / criterio..."></textarea></div></div><div class="question-group"><h3>6. Validación Comercial De Producto · G03</h3><div class="question"><p>6.1. ¿Comercial recibe una única alternativa o más de una candidata?</p><textarea class="answer-box answer" data-save-key="q_6_1" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>6.2. ¿Qué información necesita Comercial para evaluar?</p><textarea class="answer-box answer" data-save-key="q_6_2" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>6.3. ¿Qué indicadores revisa Comercial?</p><textarea class="answer-box answer" data-save-key="q_6_3" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>6.4. ¿Qué causa una aprobación?</p><textarea class="answer-box answer" data-save-key="q_6_4" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>6.5. ¿Qué causa un pedido de ajuste?</p><textarea class="answer-box answer" data-save-key="q_6_5" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>6.6. ¿Qué causa una reformulación completa?</p><textarea class="answer-box answer" data-save-key="q_6_6" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>6.7. ¿Qué causa un rechazo total?</p><textarea class="answer-box answer" data-save-key="q_6_7" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>6.8. ¿Quién tiene la decisión final si Comercial y Desarrollo de Producto no coinciden?</p><textarea class="answer-box answer" data-save-key="q_6_8" placeholder="Respuesta / criterio..."></textarea></div></div><div class="question-group"><h3>7. Validación Financiera / Negocio</h3><div class="question"><p>7.1. ¿Quién valida la ecuación económica preliminar?</p><textarea class="answer-box answer" data-save-key="q_7_1" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>7.2. ¿Financiero participa en esta etapa o más adelante?</p><textarea class="answer-box answer" data-save-key="q_7_2" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>7.3. ¿Qué indicadores mínimos revisa?</p><textarea class="answer-box answer" data-save-key="q_7_3" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>7.4. ¿Existe una rentabilidad objetivo?</p><textarea class="answer-box answer" data-save-key="q_7_4" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>7.5. ¿Existe un costo objetivo?</p><textarea class="answer-box answer" data-save-key="q_7_5" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>7.6. ¿El ticket de venta objetivo se cruza contra costo estimado?</p><textarea class="answer-box answer" data-save-key="q_7_6" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>7.7. ¿Qué condición económica puede bloquear una alternativa aunque sea vendible?</p><textarea class="answer-box answer" data-save-key="q_7_7" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>7.8. ¿Quién aprueba seguir invirtiendo tiempo de desarrollo desde el punto de vista económico?</p><textarea class="answer-box answer" data-save-key="q_7_8" placeholder="Respuesta / criterio..."></textarea></div></div><div class="question-group"><h3>8. Salida De La Estación</h3><div class="question"><p>8.1. Cuando esta etapa finaliza, ¿qué recibe el siguiente actor del proceso?</p><textarea class="answer-box answer" data-save-key="q_8_1" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>8.2. ¿La salida debería ser una ficha de producto conceptual, un modelo conceptual, un informe de viabilidad o una combinación?</p><textarea class="answer-box answer" data-save-key="q_8_2" placeholder="Respuesta / criterio..."></textarea></div><div class="question"><p>8.3. ¿Qué información mínima debería contener para que Proyecto pueda avanzar sin reinterpretar todo desde cero?</p><textarea class="answer-box answer" data-save-key="q_8_3" placeholder="Respuesta / criterio..."></textarea></div></div></section>
 
@@ -500,6 +500,11 @@ function createRowId(seed=''){return STATION_ID+'_row_'+Date.now()+'_'+Math.rand
 function ensureRaciIds(rows=raciRows){rows.forEach((row,idx)=>{if(!row.row_id)row.row_id=createRowId(idx)});return rows}
 function getBaseRaciRows(){return baseRaciRows.map((row,idx)=>({...row,row_id:row.row_id||STATION_ID+'_base_'+String(idx+1).padStart(2,'0'),deleted:false}))}
 
+
+const EDITOR_KEY=STORAGE_PREFIX+'editor';
+let dirtyRecordIds=new Set();
+let dirtyRaciIds=new Set();
+
 function getEditorName(){
   const el=document.getElementById('editorName');
   const value=(el?el.value:localStorage.getItem(EDITOR_KEY)||'').trim();
@@ -512,21 +517,45 @@ function initEditorName(){
   if(saved)el.value=saved;
   el.addEventListener('input',()=>{
     localStorage.setItem(EDITOR_KEY,el.value.trim());
-    setAnyState('Editor actualizado · '+nowTime());
+    setAnyState('Responsable actualizado · '+nowTime());
   });
+}
+function markRecordDirty(itemId){
+  if(itemId)dirtyRecordIds.add(itemId);
+}
+function markRaciDirty(row){
+  if(!row)return;
+  ensureRaciIds([row]);
+  if(row.row_id)dirtyRaciIds.add(row.row_id);
+}
+function clearDirtyState(sentPayload,manual=false){
+  if(manual){
+    dirtyRecordIds.clear();
+    dirtyRaciIds.clear();
+    deletedRaciRows=[];
+    return;
+  }
+  if(sentPayload&&Array.isArray(sentPayload.records))sentPayload.records.forEach(r=>dirtyRecordIds.delete(r.item_id));
+  if(sentPayload&&Array.isArray(sentPayload.raci)){
+    const sentIds=new Set(sentPayload.raci.map(r=>r.row_id).filter(Boolean));
+    sentIds.forEach(id=>dirtyRaciIds.delete(id));
+    deletedRaciRows=deletedRaciRows.filter(row=>!sentIds.has(row.row_id));
+  }
 }
 
 function addRaciRow(){
   const row={row_id:createRowId('manual'),actividad:getVal('raciActividad'),r:getVal('raciR'),a:getVal('raciA'),c:getVal('raciC'),i:getVal('raciI'),notas:getVal('raciNotas'),deleted:false};
   if(!row.actividad){alert('Ingresá una actividad o decisión para agregarla al RACI.');return}
-  raciRows.push(row);clearRaciForm();renderRaciRows();saveRaciData();
+  raciRows.push(row);markRaciDirty(row);clearRaciForm();renderRaciRows();saveRaciData();
 }
 function clearRaciForm(){['raciActividad','raciR','raciA','raciC','raciI','raciNotas'].forEach(id=>setVal(id,''))}
 function loadBaseRaci(){
   if(raciRows.length&&!confirm('Esto reemplaza la matriz editable actual por la matriz base. ¿Continuar?'))return;
   ensureRaciIds();
   raciRows.forEach(row=>{if(row.row_id)deletedRaciRows.push({...row,deleted:true})});
-  raciRows=getBaseRaciRows();renderRaciRows();saveRaciData(true);
+  raciRows=getBaseRaciRows();
+  raciRows.forEach(row=>markRaciDirty(row));
+  renderRaciRows();saveRaciData(true);
 }
 function renderRaciRows(){
   const body=document.getElementById('raciEditableBody');if(!body)return;body.innerHTML='';ensureRaciIds();
@@ -536,15 +565,26 @@ function renderRaciRows(){
     body.appendChild(tr);
   });
 }
-function updateRaciCell(idx,key,value){if(!raciRows[idx])return;ensureRaciIds();raciRows[idx][key]=value;saveRaciData()}
+function updateRaciCell(idx,key,value){
+  if(!raciRows[idx])return;
+  ensureRaciIds();
+  raciRows[idx][key]=value;
+  markRaciDirty(raciRows[idx]);
+  saveRaciData();
+}
 function deleteRaciRow(idx){
   ensureRaciIds();
   const removed=raciRows.splice(idx,1)[0];
-  if(removed&&removed.row_id)deletedRaciRows.push({...removed,deleted:true});
+  if(removed&&removed.row_id)deletedRaciRows.push({...removed,deleted:true,updated_by:getEditorName()});
   renderRaciRows();saveRaciData();
 }
 function saveRaciData(showAlert=false){
-  try{localStorage.setItem(RACI_KEY,JSON.stringify(ensureRaciIds()));setSaveState('raciSaveState','Guardado local · '+nowTime());scheduleCloudSave();if(showAlert)alert('Matriz base cargada y enviada a Google Sheets.')}
+  try{
+    localStorage.setItem(RACI_KEY,JSON.stringify(ensureRaciIds()));
+    setSaveState('raciSaveState','Guardado local · pendiente Google · '+nowTime());
+    scheduleCloudSave();
+    if(showAlert)alert('Matriz base cargada y enviada a Google Sheets.');
+  }
   catch(e){alert('No se pudo guardar localmente. Revisá permisos del navegador.')}
 }
 function loadRaciData(){
@@ -558,14 +598,19 @@ function exportAnswersJson(){const payload={estacion:STATION_NAME,fecha_exportac
 function csvEscape(value){const v=String(value||'');return '"'+v.replace(/"/g,'""')+'"'}
 function downloadText(filename,text,type){const blob=new Blob([text],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url)}
 function nowTime(){return new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'})}
-function setSaveState(id,message){const el=document.getElementById(id);if(!el)return;el.innerText=message||('Guardado · '+nowTime());clearTimeout(el._clearTimer);el._clearTimer=setTimeout(()=>{el.innerText=''},3600)}
+function setSaveState(id,message){const el=document.getElementById(id);if(!el)return;el.innerText=message||('Guardado · '+nowTime());clearTimeout(el._clearTimer);el._clearTimer=setTimeout(()=>{el.innerText=''},4200)}
 function setAnyState(message){setSaveState('globalSaveState',message);setSaveState('raciSaveState',message);const ans=document.getElementById('answersSaveState');if(ans)ans.innerText=message}
 
 function initAutosave(){
   document.querySelectorAll('[data-save-key]').forEach(el=>{
     const key=STORAGE_PREFIX+el.dataset.saveKey;
     const saved=localStorage.getItem(key);if(saved!==null)el.value=saved;
-    el.addEventListener('input',()=>{localStorage.setItem(key,el.value);setSaveState(el.classList.contains('answer')?'answersSaveState':'raciSaveState','Guardado local · '+nowTime());scheduleCloudSave()});
+    el.addEventListener('input',()=>{
+      localStorage.setItem(key,el.value);
+      markRecordDirty(el.dataset.saveKey);
+      setSaveState(el.classList.contains('answer')?'answersSaveState':'raciSaveState','Guardado local · pendiente Google · '+nowTime());
+      scheduleCloudSave();
+    });
   });
 }
 function collectSavedText(){const out={};document.querySelectorAll('[data-save-key]').forEach(el=>{out[el.dataset.saveKey]=el.value||''});return out}
@@ -580,11 +625,13 @@ function getRecordLabel(el){
   const title=container?container.querySelector('h3,summary,h2'):null;
   return [title?title.innerText.trim():'',localLabel?localLabel.innerText.trim():''].filter(Boolean).join(' · ')||el.dataset.saveKey;
 }
-function collectRecords(){
+function collectRecords(onlyDirty=false){
   const records=[];
   document.querySelectorAll('[data-save-key]').forEach(el=>{
+    const itemId=el.dataset.saveKey;
+    if(onlyDirty&&!dirtyRecordIds.has(itemId))return;
     const section=el.closest('section');
-    records.push({section:section?section.id:'general',item_id:el.dataset.saveKey,label:getRecordLabel(el),value:el.value||'',updated_by:getEditorName()});
+    records.push({section:section?section.id:'general',item_id:itemId,label:getRecordLabel(el),value:el.value||'',updated_by:getEditorName()});
   });
   return records;
 }
@@ -596,19 +643,26 @@ function applyRecords(records){
     if(el){el.value=item.value||'';localStorage.setItem(STORAGE_PREFIX+item.item_id,item.value||'')}
   });
 }
-function collectPayload(){
+function collectPayload(manual=false){
   ensureRaciIds();
   const editor=getEditorName();
-  const activeRows=raciRows.map(row=>({row_id:row.row_id,actividad:row.actividad||'',r:row.r||'',a:row.a||'',c:row.c||'',i:row.i||'',notas:row.notas||'',deleted:false,updated_by:editor}));
+  const records=collectRecords(!manual);
+  const activeRows=raciRows
+    .filter(row=>manual||dirtyRaciIds.has(row.row_id))
+    .map(row=>({row_id:row.row_id,actividad:row.actividad||'',r:row.r||'',a:row.a||'',c:row.c||'',i:row.i||'',notas:row.notas||'',deleted:false,updated_by:editor}));
   const deletedRows=deletedRaciRows.map(row=>({...row,updated_by:row.updated_by||editor}));
-  return {action:'save',station:STATION_ID,updated_by:editor,records:collectRecords(),raci:[...activeRows,...deletedRows]};
+  const raci=[...activeRows,...deletedRows];
+  if(!manual&&records.length===0&&raci.length===0)return null;
+  return {action:'save',station:STATION_ID,updated_by:editor,records,raci};
 }
 function scheduleCloudSave(){clearTimeout(cloudSaveTimer);cloudSaveTimer=setTimeout(()=>saveToGoogleNow(false),900)}
 function saveToGoogleNow(manual=false){
-  const form=new URLSearchParams();form.append('payload',JSON.stringify(collectPayload()));
+  const payload=collectPayload(manual);
+  if(!payload){setAnyState('Sin cambios pendientes');return Promise.resolve();}
+  const form=new URLSearchParams();form.append('payload',JSON.stringify(payload));
   setAnyState('Sincronizando Google Sheets...');
   return fetch(GOOGLE_API_URL,{method:'POST',mode:'no-cors',body:form})
-    .then(()=>{setAnyState('Enviado a Google Sheets · '+nowTime());if(manual)alert('Datos enviados a Google Sheets.')})
+    .then(()=>{clearDirtyState(payload,manual);setAnyState('Enviado a Google Sheets · '+nowTime());if(manual)alert('Datos enviados a Google Sheets.')})
     .catch(err=>{console.error(err);setAnyState('No se pudo sincronizar con Google Sheets');if(manual)alert('No se pudo enviar a Google Sheets. Revisá la implementación del Apps Script.')});
 }
 function loadFromGoogle(manual=false){
@@ -622,6 +676,7 @@ function loadFromGoogle(manual=false){
       if(!data||!data.ok){setAnyState('No se pudo cargar Google Sheets');if(manual)alert('No se pudo cargar Google Sheets.');reject(data);return;}
       if(Array.isArray(data.records)&&data.records.length)applyRecords(data.records);
       if(Array.isArray(data.raci)&&data.raci.length){raciRows=data.raci.map(row=>({row_id:row.row_id||createRowId('google'),actividad:row.actividad||'',r:row.r||'',a:row.a||'',c:row.c||'',i:row.i||'',notas:row.notas||'',deleted:false}));ensureRaciIds();localStorage.setItem(RACI_KEY,JSON.stringify(raciRows));renderRaciRows();}
+      dirtyRecordIds.clear();dirtyRaciIds.clear();deletedRaciRows=[];
       const count=(data.records?data.records.length:0)+(data.raci?data.raci.length:0);
       setAnyState(count?'Cargado desde Google Sheets · '+nowTime():'Google Sheets sin datos para esta estación');
       if(manual)alert(count?'Datos cargados desde Google Sheets.':'Todavía no hay datos guardados para esta estación.');
@@ -637,6 +692,9 @@ document.addEventListener('DOMContentLoaded',()=>{
   initEditorName();loadRaciData();initAutosave();
   document.querySelectorAll('aside a').forEach(a=>{a.addEventListener('click',()=>{document.querySelectorAll('aside a').forEach(x=>x.classList.remove('active'));a.classList.add('active')})});
   loadFromGoogle(false).catch(()=>{});
+});
+
+loadFromGoogle(false).catch(()=>{});
 });
 </script>
 

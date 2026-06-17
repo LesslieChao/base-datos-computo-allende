@@ -11,7 +11,7 @@
 <body>
 <header><h1>Framework de Producción de Proyectos</h1><p>Estación 01 · Captura y validación de información base para iniciar Concept</p><p><span class="tag blue">Versión de trabajo</span> <span class="tag amber">Incógnitas abiertas</span> <span class="tag violet">Editable directivo</span></p></header>
 <div class="wrapper"><aside><a href="#resumen" class="active">Resumen</a><a href="#flujo">Flujo propuesto</a><a href="#raci">RACI</a><a href="#reglas">Reglas</a><a href="#gate">Gate G01</a><a href="#incognitas">Incógnitas abiertas</a></aside><main>
-<div class="editable-panel editor-panel"><h3>Identificación de edición</h3><p>Completá este campo para que Google Sheets registre quién hizo la última edición en <b>updated_by</b>. No es automático porque la página se ejecuta desde GitHub Pages.</p><div class="form-grid"><div class="field"><label for="editorName">Editor / responsable</label><input id="editorName" placeholder="Ej.: Nahuel / Eugenia / Dirección"></div><div class="field"><label>Estado de sincronización</label><span id="globalSaveState" class="save-state"></span></div></div></div>
+<div class="editable-panel editor-panel"><h3>Responsable de edición</h3><div class="form-grid"><div class="field"><label for="editorName">Responsable</label><input id="editorName" placeholder="Nombre del responsable"></div><div class="field"><label>Estado de sincronización</label><span id="globalSaveState" class="save-state"></span></div></div></div>
 
 <section id="resumen"><h2>1. Resumen ejecutivo</h2><div class="grid grid-3"><div class="card kpi"><strong>01</strong><p>Estación de producción definida</p></div><div class="card kpi"><strong>G01</strong><p>Aptitud para iniciar Concept</p></div><div class="card kpi"><strong>4</strong><p>Incertidumbres iniciales a controlar</p></div></div><div class="card" style="margin-top:16px"><h3>Principio de diseño</h3><p>Esta etapa no valida un edificio ni una implantación, porque todavía no existe proyecto. Valida si se conoce lo suficiente la realidad inicial del lote, el negocio y los antecedentes como para comenzar a estructurar Concept con riesgo controlado.</p></div></section>
 <section id="flujo"><h2>2. Flujo propuesto</h2><div class="controls"><button onclick="zoomSvg(1.1)">Zoom +</button><button onclick="zoomSvg(0.9)">Zoom -</button><button class="secondary" onclick="resetSvg()">Reset</button></div><div class="svg-wrap"><svg id="processSvg" viewBox="0 0 1180 430" width="100%" height="430"><defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#7b849e"></path></marker></defs><rect x="40" y="75" width="180" height="95" rx="16" class="node pending"/><text x="60" y="105" class="title">Oficina del desarrollador</text><text x="60" y="130" class="small">Actor origen</text><text x="60" y="150" class="note">No pertenece a DIV4</text><line x1="220" y1="122" x2="300" y2="122" class="arrow"/><rect x="300" y="75" width="190" height="95" rx="16" class="node"/><text x="320" y="105" class="title">Input inicial</text><text x="320" y="130" class="small">Información a validar</text><text x="320" y="150" class="note">Pre Concept</text><line x1="490" y1="122" x2="570" y2="122" class="arrow"/><rect x="570" y="75" width="190" height="95" rx="16" class="node good"/><text x="590" y="105" class="title">Recepción DIV4</text><text x="590" y="130" class="small">R: Eugenia Mayol</text><text x="590" y="150" class="note">Recepción constante</text><line x1="760" y1="122" x2="840" y2="122" class="arrow"/><rect x="840" y="75" width="230" height="95" rx="16" class="node gate"/><text x="860" y="105" class="title">G01 · Aptitud Concept</text><text x="860" y="130" class="small">¿Información suficiente?</text><text x="860" y="150" class="note">No es solo checklist documental</text><line x1="955" y1="170" x2="955" y2="245" class="arrow"/><rect x="820" y="245" width="270" height="95" rx="16" class="node good"/><text x="840" y="275" class="title">Base de Concept Validada</text><text x="840" y="300" class="small">Salida / paquete inicial</text><text x="840" y="320" class="note">Materia prima para Concept</text><path d="M840 122 C700 240 470 240 300 150" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="8 6" marker-end="url(#arrow)"/><text x="470" y="250" class="small" fill="#fca5a5">Si NO cumple: vuelve a oficina del desarrollador</text><rect x="85" y="275" width="210" height="65" rx="12" class="node"/><text x="105" y="305" class="title">Kick off</text><text x="105" y="328" class="note">Pendiente: definir si dispara o formaliza entregables</text><line x1="190" y1="275" x2="350" y2="165" class="arrow"/></svg></div></section>
@@ -54,6 +54,11 @@ function createRowId(seed=''){return STATION_ID+'_row_'+Date.now()+'_'+Math.rand
 function ensureRaciIds(rows=raciRows){rows.forEach((row,idx)=>{if(!row.row_id)row.row_id=createRowId(idx)});return rows}
 function getBaseRaciRows(){return baseRaciRows.map((row,idx)=>({...row,row_id:row.row_id||STATION_ID+'_base_'+String(idx+1).padStart(2,'0'),deleted:false}))}
 
+
+const EDITOR_KEY=STORAGE_PREFIX+'editor';
+let dirtyRecordIds=new Set();
+let dirtyRaciIds=new Set();
+
 function getEditorName(){
   const el=document.getElementById('editorName');
   const value=(el?el.value:localStorage.getItem(EDITOR_KEY)||'').trim();
@@ -66,21 +71,45 @@ function initEditorName(){
   if(saved)el.value=saved;
   el.addEventListener('input',()=>{
     localStorage.setItem(EDITOR_KEY,el.value.trim());
-    setAnyState('Editor actualizado · '+nowTime());
+    setAnyState('Responsable actualizado · '+nowTime());
   });
+}
+function markRecordDirty(itemId){
+  if(itemId)dirtyRecordIds.add(itemId);
+}
+function markRaciDirty(row){
+  if(!row)return;
+  ensureRaciIds([row]);
+  if(row.row_id)dirtyRaciIds.add(row.row_id);
+}
+function clearDirtyState(sentPayload,manual=false){
+  if(manual){
+    dirtyRecordIds.clear();
+    dirtyRaciIds.clear();
+    deletedRaciRows=[];
+    return;
+  }
+  if(sentPayload&&Array.isArray(sentPayload.records))sentPayload.records.forEach(r=>dirtyRecordIds.delete(r.item_id));
+  if(sentPayload&&Array.isArray(sentPayload.raci)){
+    const sentIds=new Set(sentPayload.raci.map(r=>r.row_id).filter(Boolean));
+    sentIds.forEach(id=>dirtyRaciIds.delete(id));
+    deletedRaciRows=deletedRaciRows.filter(row=>!sentIds.has(row.row_id));
+  }
 }
 
 function addRaciRow(){
   const row={row_id:createRowId('manual'),actividad:getVal('raciActividad'),r:getVal('raciR'),a:getVal('raciA'),c:getVal('raciC'),i:getVal('raciI'),notas:getVal('raciNotas'),deleted:false};
   if(!row.actividad){alert('Ingresá una actividad o decisión para agregarla al RACI.');return}
-  raciRows.push(row);clearRaciForm();renderRaciRows();saveRaciData();
+  raciRows.push(row);markRaciDirty(row);clearRaciForm();renderRaciRows();saveRaciData();
 }
 function clearRaciForm(){['raciActividad','raciR','raciA','raciC','raciI','raciNotas'].forEach(id=>setVal(id,''))}
 function loadBaseRaci(){
   if(raciRows.length&&!confirm('Esto reemplaza la matriz editable actual por la matriz base. ¿Continuar?'))return;
   ensureRaciIds();
   raciRows.forEach(row=>{if(row.row_id)deletedRaciRows.push({...row,deleted:true})});
-  raciRows=getBaseRaciRows();renderRaciRows();saveRaciData(true);
+  raciRows=getBaseRaciRows();
+  raciRows.forEach(row=>markRaciDirty(row));
+  renderRaciRows();saveRaciData(true);
 }
 function renderRaciRows(){
   const body=document.getElementById('raciEditableBody');if(!body)return;body.innerHTML='';ensureRaciIds();
@@ -90,15 +119,26 @@ function renderRaciRows(){
     body.appendChild(tr);
   });
 }
-function updateRaciCell(idx,key,value){if(!raciRows[idx])return;ensureRaciIds();raciRows[idx][key]=value;saveRaciData()}
+function updateRaciCell(idx,key,value){
+  if(!raciRows[idx])return;
+  ensureRaciIds();
+  raciRows[idx][key]=value;
+  markRaciDirty(raciRows[idx]);
+  saveRaciData();
+}
 function deleteRaciRow(idx){
   ensureRaciIds();
   const removed=raciRows.splice(idx,1)[0];
-  if(removed&&removed.row_id)deletedRaciRows.push({...removed,deleted:true});
+  if(removed&&removed.row_id)deletedRaciRows.push({...removed,deleted:true,updated_by:getEditorName()});
   renderRaciRows();saveRaciData();
 }
 function saveRaciData(showAlert=false){
-  try{localStorage.setItem(RACI_KEY,JSON.stringify(ensureRaciIds()));setSaveState('raciSaveState','Guardado local · '+nowTime());scheduleCloudSave();if(showAlert)alert('Matriz base cargada y enviada a Google Sheets.')}
+  try{
+    localStorage.setItem(RACI_KEY,JSON.stringify(ensureRaciIds()));
+    setSaveState('raciSaveState','Guardado local · pendiente Google · '+nowTime());
+    scheduleCloudSave();
+    if(showAlert)alert('Matriz base cargada y enviada a Google Sheets.');
+  }
   catch(e){alert('No se pudo guardar localmente. Revisá permisos del navegador.')}
 }
 function loadRaciData(){
@@ -112,14 +152,19 @@ function exportAnswersJson(){const payload={estacion:STATION_NAME,fecha_exportac
 function csvEscape(value){const v=String(value||'');return '"'+v.replace(/"/g,'""')+'"'}
 function downloadText(filename,text,type){const blob=new Blob([text],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url)}
 function nowTime(){return new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'})}
-function setSaveState(id,message){const el=document.getElementById(id);if(!el)return;el.innerText=message||('Guardado · '+nowTime());clearTimeout(el._clearTimer);el._clearTimer=setTimeout(()=>{el.innerText=''},3600)}
+function setSaveState(id,message){const el=document.getElementById(id);if(!el)return;el.innerText=message||('Guardado · '+nowTime());clearTimeout(el._clearTimer);el._clearTimer=setTimeout(()=>{el.innerText=''},4200)}
 function setAnyState(message){setSaveState('globalSaveState',message);setSaveState('raciSaveState',message);const ans=document.getElementById('answersSaveState');if(ans)ans.innerText=message}
 
 function initAutosave(){
   document.querySelectorAll('[data-save-key]').forEach(el=>{
     const key=STORAGE_PREFIX+el.dataset.saveKey;
     const saved=localStorage.getItem(key);if(saved!==null)el.value=saved;
-    el.addEventListener('input',()=>{localStorage.setItem(key,el.value);setSaveState(el.classList.contains('answer')?'answersSaveState':'raciSaveState','Guardado local · '+nowTime());scheduleCloudSave()});
+    el.addEventListener('input',()=>{
+      localStorage.setItem(key,el.value);
+      markRecordDirty(el.dataset.saveKey);
+      setSaveState(el.classList.contains('answer')?'answersSaveState':'raciSaveState','Guardado local · pendiente Google · '+nowTime());
+      scheduleCloudSave();
+    });
   });
 }
 function collectSavedText(){const out={};document.querySelectorAll('[data-save-key]').forEach(el=>{out[el.dataset.saveKey]=el.value||''});return out}
@@ -134,11 +179,13 @@ function getRecordLabel(el){
   const title=container?container.querySelector('h3,summary,h2'):null;
   return [title?title.innerText.trim():'',localLabel?localLabel.innerText.trim():''].filter(Boolean).join(' · ')||el.dataset.saveKey;
 }
-function collectRecords(){
+function collectRecords(onlyDirty=false){
   const records=[];
   document.querySelectorAll('[data-save-key]').forEach(el=>{
+    const itemId=el.dataset.saveKey;
+    if(onlyDirty&&!dirtyRecordIds.has(itemId))return;
     const section=el.closest('section');
-    records.push({section:section?section.id:'general',item_id:el.dataset.saveKey,label:getRecordLabel(el),value:el.value||'',updated_by:getEditorName()});
+    records.push({section:section?section.id:'general',item_id:itemId,label:getRecordLabel(el),value:el.value||'',updated_by:getEditorName()});
   });
   return records;
 }
@@ -150,19 +197,26 @@ function applyRecords(records){
     if(el){el.value=item.value||'';localStorage.setItem(STORAGE_PREFIX+item.item_id,item.value||'')}
   });
 }
-function collectPayload(){
+function collectPayload(manual=false){
   ensureRaciIds();
   const editor=getEditorName();
-  const activeRows=raciRows.map(row=>({row_id:row.row_id,actividad:row.actividad||'',r:row.r||'',a:row.a||'',c:row.c||'',i:row.i||'',notas:row.notas||'',deleted:false,updated_by:editor}));
+  const records=collectRecords(!manual);
+  const activeRows=raciRows
+    .filter(row=>manual||dirtyRaciIds.has(row.row_id))
+    .map(row=>({row_id:row.row_id,actividad:row.actividad||'',r:row.r||'',a:row.a||'',c:row.c||'',i:row.i||'',notas:row.notas||'',deleted:false,updated_by:editor}));
   const deletedRows=deletedRaciRows.map(row=>({...row,updated_by:row.updated_by||editor}));
-  return {action:'save',station:STATION_ID,updated_by:editor,records:collectRecords(),raci:[...activeRows,...deletedRows]};
+  const raci=[...activeRows,...deletedRows];
+  if(!manual&&records.length===0&&raci.length===0)return null;
+  return {action:'save',station:STATION_ID,updated_by:editor,records,raci};
 }
 function scheduleCloudSave(){clearTimeout(cloudSaveTimer);cloudSaveTimer=setTimeout(()=>saveToGoogleNow(false),900)}
 function saveToGoogleNow(manual=false){
-  const form=new URLSearchParams();form.append('payload',JSON.stringify(collectPayload()));
+  const payload=collectPayload(manual);
+  if(!payload){setAnyState('Sin cambios pendientes');return Promise.resolve();}
+  const form=new URLSearchParams();form.append('payload',JSON.stringify(payload));
   setAnyState('Sincronizando Google Sheets...');
   return fetch(GOOGLE_API_URL,{method:'POST',mode:'no-cors',body:form})
-    .then(()=>{setAnyState('Enviado a Google Sheets · '+nowTime());if(manual)alert('Datos enviados a Google Sheets.')})
+    .then(()=>{clearDirtyState(payload,manual);setAnyState('Enviado a Google Sheets · '+nowTime());if(manual)alert('Datos enviados a Google Sheets.')})
     .catch(err=>{console.error(err);setAnyState('No se pudo sincronizar con Google Sheets');if(manual)alert('No se pudo enviar a Google Sheets. Revisá la implementación del Apps Script.')});
 }
 function loadFromGoogle(manual=false){
@@ -176,6 +230,7 @@ function loadFromGoogle(manual=false){
       if(!data||!data.ok){setAnyState('No se pudo cargar Google Sheets');if(manual)alert('No se pudo cargar Google Sheets.');reject(data);return;}
       if(Array.isArray(data.records)&&data.records.length)applyRecords(data.records);
       if(Array.isArray(data.raci)&&data.raci.length){raciRows=data.raci.map(row=>({row_id:row.row_id||createRowId('google'),actividad:row.actividad||'',r:row.r||'',a:row.a||'',c:row.c||'',i:row.i||'',notas:row.notas||'',deleted:false}));ensureRaciIds();localStorage.setItem(RACI_KEY,JSON.stringify(raciRows));renderRaciRows();}
+      dirtyRecordIds.clear();dirtyRaciIds.clear();deletedRaciRows=[];
       const count=(data.records?data.records.length:0)+(data.raci?data.raci.length:0);
       setAnyState(count?'Cargado desde Google Sheets · '+nowTime():'Google Sheets sin datos para esta estación');
       if(manual)alert(count?'Datos cargados desde Google Sheets.':'Todavía no hay datos guardados para esta estación.');
@@ -191,6 +246,9 @@ document.addEventListener('DOMContentLoaded',()=>{
   initEditorName();loadRaciData();initAutosave();
   document.querySelectorAll('aside a').forEach(a=>{a.addEventListener('click',()=>{document.querySelectorAll('aside a').forEach(x=>x.classList.remove('active'));a.classList.add('active')})});
   loadFromGoogle(false).catch(()=>{});
+});
+
+loadFromGoogle(false).catch(()=>{});
 });
 </script>
 </body>
