@@ -14,7 +14,7 @@
 <section id="resumen"><h2>1. Resumen ejecutivo</h2><div class="grid grid-3"><div class="card kpi"><strong>01</strong><p>Estación de producción definida</p></div><div class="card kpi"><strong>G01</strong><p>Aptitud para iniciar Concept</p></div><div class="card kpi"><strong>4</strong><p>Incertidumbres iniciales a controlar</p></div></div><div class="card" style="margin-top:16px"><h3>Principio de diseño</h3><p>Esta etapa no valida un edificio ni una implantación, porque todavía no existe proyecto. Valida si se conoce lo suficiente la realidad inicial del lote, el negocio y los antecedentes como para comenzar a estructurar Concept con riesgo controlado.</p></div></section>
 <section id="flujo"><h2>2. Flujo propuesto</h2><div class="controls"><button onclick="zoomSvg(1.1)">Zoom +</button><button onclick="zoomSvg(0.9)">Zoom -</button><button class="secondary" onclick="resetSvg()">Reset</button></div><div class="svg-wrap"><svg id="processSvg" viewBox="0 0 1180 430" width="100%" height="430"><defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#7b849e"></path></marker></defs><rect x="40" y="75" width="180" height="95" rx="16" class="node pending"/><text x="60" y="105" class="title">Oficina del desarrollador</text><text x="60" y="130" class="small">Actor origen</text><text x="60" y="150" class="note">No pertenece a DIV4</text><line x1="220" y1="122" x2="300" y2="122" class="arrow"/><rect x="300" y="75" width="190" height="95" rx="16" class="node"/><text x="320" y="105" class="title">Input inicial</text><text x="320" y="130" class="small">Información a validar</text><text x="320" y="150" class="note">Pre Concept</text><line x1="490" y1="122" x2="570" y2="122" class="arrow"/><rect x="570" y="75" width="190" height="95" rx="16" class="node good"/><text x="590" y="105" class="title">Recepción DIV4</text><text x="590" y="130" class="small">R: Eugenia Mayol</text><text x="590" y="150" class="note">Recepción constante</text><line x1="760" y1="122" x2="840" y2="122" class="arrow"/><rect x="840" y="75" width="230" height="95" rx="16" class="node gate"/><text x="860" y="105" class="title">G01 · Aptitud Concept</text><text x="860" y="130" class="small">¿Información suficiente?</text><text x="860" y="150" class="note">No es solo checklist documental</text><line x1="955" y1="170" x2="955" y2="245" class="arrow"/><rect x="820" y="245" width="270" height="95" rx="16" class="node good"/><text x="840" y="275" class="title">Base de Concept Validada</text><text x="840" y="300" class="small">Salida / paquete inicial</text><text x="840" y="320" class="note">Materia prima para Concept</text><path d="M840 122 C700 240 470 240 300 150" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="8 6" marker-end="url(#arrow)"/><text x="470" y="250" class="small" fill="#fca5a5">Si NO cumple: vuelve a oficina del desarrollador</text><rect x="85" y="275" width="210" height="65" rx="12" class="node"/><text x="105" y="305" class="title">Kick off</text><text x="105" y="328" class="note">Pendiente: definir si dispara o formaliza entregables</text><line x1="190" y1="275" x2="350" y2="165" class="arrow"/></svg></div></section>
 <section id="raci"><h2>3. RACI preliminar</h2><table><thead><tr><th>Actividad</th><th>R</th><th>A</th><th>C</th><th>I</th></tr></thead><tbody><tr><td>Entrega de input inicial</td><td>Oficina del desarrollador</td><td>Pendiente definir</td><td>DIV4 / Eugenia</td><td>Proyecto</td></tr><tr><td>Recepción de información</td><td>Eugenia Mayol / DIV4</td><td>Eugenia Mayol</td><td>Oficina del desarrollador</td><td>Proyecto</td></tr><tr><td>Validación de completitud y aptitud inicial</td><td>Eugenia Mayol</td><td>Eugenia Mayol</td><td>Municipal / Proyecto / Estructuras según caso</td><td>Desarrollo / Proyecto</td></tr><tr><td>Corrección de faltantes</td><td>Oficina del desarrollador</td><td>Pendiente definir</td><td>Eugenia Mayol</td><td>Proyecto</td></tr><tr><td>Liberación para iniciar Concept</td><td>Eugenia Mayol</td><td>Eugenia Mayol</td><td>Proyecto / Estructuras según riesgo</td><td>Oficina del desarrollador / Proyecto</td></tr></tbody></table>
-<div class="editable-panel"><h3>RACI editable para dirección</h3><p>Área de trabajo para completar responsables, ajustar criterios y dejar notas. Se guarda automáticamente en este navegador.</p><div class="form-grid"><div class="field full"><label for="raciActividad">Actividad / decisión</label><input id="raciActividad" placeholder="Ej.: Validar faltantes bloqueantes"></div><div class="field"><label for="raciR">R · Responsable</label><input id="raciR" list="actorList" placeholder="Quién ejecuta"></div><div class="field"><label for="raciA">A · Accountable</label><input id="raciA" list="actorList" placeholder="Quién responde"></div><div class="field"><label for="raciC">C · Consultado</label><input id="raciC" list="actorList" placeholder="A quién se consulta"></div><div class="field"><label for="raciI">I · Informado</label><input id="raciI" list="actorList" placeholder="A quién se informa"></div><div class="field full"><label for="raciNotas">Notas</label><textarea id="raciNotas" placeholder="Criterios, dudas, condiciones de validación o comentarios de dirección"></textarea></div></div><datalist id="actorList"><option value="Oficina del desarrollador"><option value="Eugenia Mayol"><option value="DIV4"><option value="Proyecto"><option value="Desarrollo"><option value="Municipal"><option value="Estructuras"><option value="Antonio"><option value="Nahuel"></datalist><div class="toolbar"><button onclick="addRaciRow()">Agregar entrada</button><button class="secondary" onclick="loadBaseRaci()">Cargar matriz base</button><button class="secondary" onclick="exportRaciCsv()">Exportar CSV</button><button class="secondary" onclick="exportRaciJson()">Exportar JSON</button><span id="raciSaveState" class="save-state"></span></div><div class="editable-table-wrap"><table class="editable-table"><thead><tr><th>Actividad</th><th>R</th><th>A</th><th>C</th><th>I</th><th class="col-note">Notas</th><th class="col-delete"></th></tr></thead><tbody id="raciEditableBody"></tbody></table></div><div class="notes-area"><label class="note-label" for="directorGeneralNotes">Notas generales de dirección</label><textarea id="directorGeneralNotes" class="note-box" data-save-key="director_general_notes" placeholder="Observaciones generales sobre la matriz, acuerdos pendientes o criterios de conducción."></textarea></div><div class="help-box">La única acción por fila es eliminar la entrada con la X roja. El resto se edita directamente sobre cada celda.</div></div></section>
+<div class="editable-panel"><h3>RACI editable para dirección</h3><p>Área de trabajo para completar responsables, ajustar criterios y dejar notas. Se guarda localmente y se sincroniza con Google Sheets.</p><div class="form-grid"><div class="field full"><label for="raciActividad">Actividad / decisión</label><input id="raciActividad" placeholder="Ej.: Validar faltantes bloqueantes"></div><div class="field"><label for="raciR">R · Responsable</label><input id="raciR" list="actorList" placeholder="Quién ejecuta"></div><div class="field"><label for="raciA">A · Accountable</label><input id="raciA" list="actorList" placeholder="Quién responde"></div><div class="field"><label for="raciC">C · Consultado</label><input id="raciC" list="actorList" placeholder="A quién se consulta"></div><div class="field"><label for="raciI">I · Informado</label><input id="raciI" list="actorList" placeholder="A quién se informa"></div><div class="field full"><label for="raciNotas">Notas</label><textarea id="raciNotas" placeholder="Criterios, dudas, condiciones de validación o comentarios de dirección"></textarea></div></div><datalist id="actorList"><option value="Oficina del desarrollador"><option value="Eugenia Mayol"><option value="DIV4"><option value="Proyecto"><option value="Desarrollo"><option value="Municipal"><option value="Estructuras"><option value="Antonio"><option value="Nahuel"></datalist><div class="toolbar"><button onclick="addRaciRow()">Agregar entrada</button><button class="secondary" onclick="loadBaseRaci()">Cargar matriz base</button><button class="secondary" onclick="loadFromGoogle(true)">Cargar Google</button><button class="secondary" onclick="saveToGoogleNow(true)">Guardar Google</button><button class="secondary" onclick="exportRaciCsv()">Exportar CSV</button><button class="secondary" onclick="exportRaciJson()">Exportar JSON</button><span id="raciSaveState" class="save-state"></span></div><div class="editable-table-wrap"><table class="editable-table"><thead><tr><th>Actividad</th><th>R</th><th>A</th><th>C</th><th>I</th><th class="col-note">Notas</th><th class="col-delete"></th></tr></thead><tbody id="raciEditableBody"></tbody></table></div><div class="notes-area"><label class="note-label" for="directorGeneralNotes">Notas generales de dirección</label><textarea id="directorGeneralNotes" class="note-box" data-save-key="director_general_notes" placeholder="Observaciones generales sobre la matriz, acuerdos pendientes o criterios de conducción."></textarea></div><div class="help-box">La única acción por fila es eliminar la entrada con la X roja. El resto se edita directamente sobre cada celda.</div></div></section>
 <section id="reglas"><h2>4. Reglas e incertidumbres iniciales</h2><div class="grid grid-2"><div class="card"><h3>Agrimensura</h3><p><span class="tag red">Obligatoria</span> No se puede iniciar Concept sin agrimensura.</p><p><b>Qué reduce:</b> incertidumbre sobre la realidad física del lote.</p><p><b>Debe permitir conocer:</b> límites, geometría, ángulos, niveles de vereda, desniveles y elementos que condicionen accesos o gestiones, como árboles u otros obstáculos relevantes.</p><div class="notes-area"><label class="note-label">Notas</label><textarea class="note-box autosave" data-save-key="regla_agrimensura_notas" placeholder="Notas sobre agrimensura..."></textarea></div></div><div class="card"><h3>Estudio de suelos</h3><p><span class="tag red">Obligatorio</span> Se definió como necesario para Concept.</p><p><b>Qué reduce:</b> incertidumbre sobre estrategia preliminar de fundación y posible impacto económico.</p><p><b>Excepción:</b> prueba de venta contra oferta de compra del lote.</p><div class="notes-area"><label class="note-label">Notas</label><textarea class="note-box autosave" data-save-key="regla_suelos_notas" placeholder="Notas sobre estudio de suelos..."></textarea></div></div><div class="card"><h3>Documentación preexistente</h3><p><span class="tag amber">Pendiente Eugenia</span></p><p>No se refiere a factibilidades. Se refiere a planchetas, planos municipales previos u otros antecedentes documentales del lote.</p><div class="notes-area"><label class="note-label">Notas</label><textarea class="note-box autosave" data-save-key="regla_documentacion_notas" placeholder="Notas sobre documentación preexistente..."></textarea></div></div><div class="card"><h3>Ficha / input del desarrollador</h3><p><span class="tag amber">A definir en etapas siguientes</span></p><p>Debe aportar información inicial para comenzar a estructurar el negocio: unidades, m² vendibles, objetivos comerciales y restricciones iniciales.</p><div class="notes-area"><label class="note-label">Notas</label><textarea class="note-box autosave" data-save-key="regla_input_desarrollador_notas" placeholder="Notas sobre ficha o input del desarrollador..."></textarea></div></div></div></section>
 <section id="gate"><h2>5. Gate G01 · Aptitud para iniciar Concept</h2><details open><summary>Objetivo del gate</summary><p>Determinar si existe información suficiente para iniciar Concept con un nivel de incertidumbre aceptable.</p><div class="gate-note"><label class="note-label">Notas</label><textarea class="note-box autosave" data-save-key="gate_objetivo_notas" placeholder="Notas sobre el objetivo del gate..."></textarea></div></details><details open><summary>No valida</summary><p>No valida si el edificio entra en el lote, porque todavía no existe edificio. No valida implantación, tipologías, volumetría ni superficies finales.</p><div class="gate-note"><label class="note-label">Notas</label><textarea class="note-box autosave" data-save-key="gate_no_valida_notas" placeholder="Notas sobre lo que el gate no valida..."></textarea></div></details><details open><summary>Sí valida</summary><ul><li>Que se conoce la realidad física básica del lote.</li><li>Que existe una base geotécnica suficiente para no iniciar con incertidumbre estructural crítica.</li><li>Que se cuenta con antecedentes documentales disponibles o se conoce su ausencia.</li><li>Que el negocio cuenta con información inicial suficiente para comenzar a estructurarse.</li></ul><div class="gate-note"><label class="note-label">Notas</label><textarea class="note-box autosave" data-save-key="gate_si_valida_notas" placeholder="Notas sobre lo que el gate sí valida..."></textarea></div></details><details><summary>Salida recomendada</summary><p><b>Base de Concept Validada</b> o <b>Input Package V1</b>.</p><p>Debe contener estado de agrimensura, estudio de suelos, documentación preexistente, ficha/input del desarrollador, faltantes, riesgos y observaciones.</p><div class="gate-note"><label class="note-label">Notas</label><textarea class="note-box autosave" data-save-key="gate_salida_notas" placeholder="Notas sobre salida recomendada..."></textarea></div></details></section>
 <section id="incognitas"><h2>6. Incógnitas abiertas</h2><p class="section-kicker">Cada pregunta tiene un campo de respuesta para registrar validaciones, acuerdos o criterios pendientes.</p><div class="right-tools"><button class="secondary" onclick="exportAnswersJson()">Exportar respuestas</button><span id="answersSaveState" class="save-state"></span></div>
@@ -27,29 +27,151 @@
 </section>
 </main></div>
 <script>
-let scale=1;const svg=document.getElementById('processSvg');function zoomSvg(f){scale*=f;const w=1180/scale;const h=430/scale;svg.setAttribute('viewBox',`0 0 ${w} ${h}`)}function resetSvg(){scale=1;svg.setAttribute('viewBox','0 0 1180 430')}
-const STORAGE_PREFIX='e01_editable_v2_';const RACI_KEY=STORAGE_PREFIX+'raci';
+let scale=1;const svg=document.getElementById('processSvg');function zoomSvg(f){if(!svg)return;scale*=f;const w=1180/scale;const h=430/scale;svg.setAttribute('viewBox',`0 0 ${w} ${h}`)}function resetSvg(){if(!svg)return;scale=1;svg.setAttribute('viewBox','0 0 1180 430')}
+const GOOGLE_API_URL='https://script.google.com/macros/s/AKfycbyt7pMJD7OI3aEL7g38v-iVNbSaDH9W1wgCc4BDVK5HWk31NqPessV3wSmqQXQtA3qEKg/exec';
+const STATION_ID='E01';
+const STATION_NAME='01 - Captura y Validación de Información Base';
+const STORAGE_PREFIX='e01_google_';
+const RACI_KEY=STORAGE_PREFIX+'raci';
 let raciRows=[];
-const baseRaciRows=[{actividad:'Entrega de input inicial',r:'Oficina del desarrollador',a:'Pendiente definir',c:'DIV4 / Eugenia',i:'Proyecto',notas:'Definir accountable real del lado desarrollador.'},{actividad:'Recepción de información',r:'Eugenia Mayol / DIV4',a:'Eugenia Mayol',c:'Oficina del desarrollador',i:'Proyecto',notas:'Confirmar canal y formato de recepción.'},{actividad:'Validación de completitud y aptitud inicial',r:'Eugenia Mayol',a:'Eugenia Mayol',c:'Municipal / Proyecto / Estructuras según caso',i:'Desarrollo / Proyecto',notas:'Separar completitud documental de evaluación de riesgo.'},{actividad:'Corrección de faltantes',r:'Oficina del desarrollador',a:'Pendiente definir',c:'Eugenia Mayol',i:'Proyecto',notas:'Registrar faltantes bloqueantes y faltantes observables.'},{actividad:'Liberación para iniciar Concept',r:'Eugenia Mayol',a:'Eugenia Mayol',c:'Proyecto / Estructuras según riesgo',i:'Oficina del desarrollador / Proyecto',notas:'La salida debería quedar registrada como Base de Concept Validada / Input Package V1.'}];
-function getVal(id){const el=document.getElementById(id);return el?el.value.trim():''}function setVal(id,value){const el=document.getElementById(id);if(el)el.value=value||''}function escapeHtml(value){return String(value??'').replace(/[&<>\"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[m]||m))}function escapeAttr(value){return escapeHtml(value).replace(/'/g,'&#039;')}
-function addRaciRow(){const row={actividad:getVal('raciActividad'),r:getVal('raciR'),a:getVal('raciA'),c:getVal('raciC'),i:getVal('raciI'),notas:getVal('raciNotas')};if(!row.actividad){alert('Ingresá una actividad o decisión para agregarla al RACI.');return}raciRows.push(row);clearRaciForm();renderRaciRows();saveRaciData()}
+let deletedRaciRows=[];
+let cloudSaveTimer=null;
+const baseRaciRows=[
+  {actividad:'Entrega de input inicial',r:'Oficina del desarrollador',a:'Pendiente definir',c:'DIV4 / Eugenia',i:'Proyecto',notas:'Definir accountable real del lado desarrollador.'},
+  {actividad:'Recepción de información',r:'Eugenia Mayol / DIV4',a:'Eugenia Mayol',c:'Oficina del desarrollador',i:'Proyecto',notas:'Confirmar canal y formato de recepción.'},
+  {actividad:'Validación de completitud y aptitud inicial',r:'Eugenia Mayol',a:'Eugenia Mayol',c:'Municipal / Proyecto / Estructuras según caso',i:'Desarrollo / Proyecto',notas:'Separar completitud documental de evaluación de riesgo.'},
+  {actividad:'Corrección de faltantes',r:'Oficina del desarrollador',a:'Pendiente definir',c:'Eugenia Mayol',i:'Proyecto',notas:'Registrar faltantes bloqueantes y faltantes observables.'},
+  {actividad:'Liberación para iniciar Concept',r:'Eugenia Mayol',a:'Eugenia Mayol',c:'Proyecto / Estructuras según riesgo',i:'Oficina del desarrollador / Proyecto',notas:'La salida debería quedar registrada como Base de Concept Validada / Input Package V1.'}
+];
+
+function getVal(id){const el=document.getElementById(id);return el?el.value.trim():''}
+function setVal(id,value){const el=document.getElementById(id);if(el)el.value=value||''}
+function escapeHtml(value){return String(value??'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]||m))}
+function escapeAttr(value){return escapeHtml(value).replace(/'/g,'&#039;')}
+function createRowId(seed=''){return STATION_ID+'_row_'+Date.now()+'_'+Math.random().toString(36).slice(2,8)+'_'+seed}
+function ensureRaciIds(rows=raciRows){rows.forEach((row,idx)=>{if(!row.row_id)row.row_id=createRowId(idx)});return rows}
+function getBaseRaciRows(){return baseRaciRows.map((row,idx)=>({...row,row_id:row.row_id||STATION_ID+'_base_'+String(idx+1).padStart(2,'0'),deleted:false}))}
+
+function addRaciRow(){
+  const row={row_id:createRowId('manual'),actividad:getVal('raciActividad'),r:getVal('raciR'),a:getVal('raciA'),c:getVal('raciC'),i:getVal('raciI'),notas:getVal('raciNotas'),deleted:false};
+  if(!row.actividad){alert('Ingresá una actividad o decisión para agregarla al RACI.');return}
+  raciRows.push(row);clearRaciForm();renderRaciRows();saveRaciData();
+}
 function clearRaciForm(){['raciActividad','raciR','raciA','raciC','raciI','raciNotas'].forEach(id=>setVal(id,''))}
-function loadBaseRaci(){if(raciRows.length && !confirm('Esto reemplaza la matriz editable actual por la matriz base. ¿Continuar?'))return;raciRows=JSON.parse(JSON.stringify(baseRaciRows));renderRaciRows();saveRaciData(true)}
-function renderRaciRows(){const body=document.getElementById('raciEditableBody');if(!body)return;body.innerHTML='';raciRows.forEach((row,idx)=>{const tr=document.createElement('tr');tr.innerHTML=`<td><input value="${escapeAttr(row.actividad)}" oninput="updateRaciCell(${idx},'actividad',this.value)"></td><td><input list="actorList" value="${escapeAttr(row.r)}" oninput="updateRaciCell(${idx},'r',this.value)"></td><td><input list="actorList" value="${escapeAttr(row.a)}" oninput="updateRaciCell(${idx},'a',this.value)"></td><td><input list="actorList" value="${escapeAttr(row.c)}" oninput="updateRaciCell(${idx},'c',this.value)"></td><td><input list="actorList" value="${escapeAttr(row.i)}" oninput="updateRaciCell(${idx},'i',this.value)"></td><td><textarea oninput="updateRaciCell(${idx},'notas',this.value)">${escapeHtml(row.notas||'')}</textarea></td><td class="col-delete"><button class="danger-icon" onclick="deleteRaciRow(${idx})" title="Eliminar entrada" aria-label="Eliminar entrada">×</button></td>`;body.appendChild(tr)})}
-function updateRaciCell(idx,key,value){if(!raciRows[idx])return;raciRows[idx][key]=value;saveRaciData()}
-function deleteRaciRow(idx){raciRows.splice(idx,1);renderRaciRows();saveRaciData()}
-function saveRaciData(showAlert=false){try{localStorage.setItem(RACI_KEY,JSON.stringify(raciRows));setSaveState('raciSaveState');if(showAlert)alert('Matriz base cargada y guardada localmente.')}catch(e){alert('No se pudo guardar localmente. Revisá permisos del navegador.')}}
-function loadRaciData(){try{const saved=localStorage.getItem(RACI_KEY);raciRows=saved?JSON.parse(saved):[];renderRaciRows()}catch(e){raciRows=[];renderRaciRows()}}
-function exportRaciJson(){const payload={estacion:'01 - Captura y Validación de Información Base',gate:'G01 - Aptitud para iniciar Concept',fecha_exportacion:new Date().toISOString(),raci:raciRows,notas_y_respuestas:collectSavedText()};downloadText('e01_raci_y_notas.json',JSON.stringify(payload,null,2),'application/json')}
-function exportRaciCsv(){const headers=['Actividad','R','A','C','I','Notas'];const rows=raciRows.map(r=>[r.actividad,r.r,r.a,r.c,r.i,r.notas]);const csv=[headers,...rows].map(cols=>cols.map(csvEscape).join(';')).join('\n');downloadText('e01_raci_editable.csv','\ufeff'+csv,'text/csv;charset=utf-8')}
-function exportAnswersJson(){const payload={estacion:'01 - Captura y Validación de Información Base',fecha_exportacion:new Date().toISOString(),respuestas:collectAnswers()};downloadText('e01_incognitas_abiertas_respuestas.json',JSON.stringify(payload,null,2),'application/json')}
+function loadBaseRaci(){
+  if(raciRows.length&&!confirm('Esto reemplaza la matriz editable actual por la matriz base. ¿Continuar?'))return;
+  ensureRaciIds();
+  raciRows.forEach(row=>{if(row.row_id)deletedRaciRows.push({...row,deleted:true})});
+  raciRows=getBaseRaciRows();renderRaciRows();saveRaciData(true);
+}
+function renderRaciRows(){
+  const body=document.getElementById('raciEditableBody');if(!body)return;body.innerHTML='';ensureRaciIds();
+  raciRows.forEach((row,idx)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td><input value="${escapeAttr(row.actividad)}" oninput="updateRaciCell(${idx},'actividad',this.value)"></td><td><input list="actorList" value="${escapeAttr(row.r)}" oninput="updateRaciCell(${idx},'r',this.value)"></td><td><input list="actorList" value="${escapeAttr(row.a)}" oninput="updateRaciCell(${idx},'a',this.value)"></td><td><input list="actorList" value="${escapeAttr(row.c)}" oninput="updateRaciCell(${idx},'c',this.value)"></td><td><input list="actorList" value="${escapeAttr(row.i)}" oninput="updateRaciCell(${idx},'i',this.value)"></td><td><textarea oninput="updateRaciCell(${idx},'notas',this.value)">${escapeHtml(row.notas||'')}</textarea></td><td class="col-delete"><button class="danger-icon" onclick="deleteRaciRow(${idx})" title="Eliminar entrada" aria-label="Eliminar entrada">×</button></td>`;
+    body.appendChild(tr);
+  });
+}
+function updateRaciCell(idx,key,value){if(!raciRows[idx])return;ensureRaciIds();raciRows[idx][key]=value;saveRaciData()}
+function deleteRaciRow(idx){
+  ensureRaciIds();
+  const removed=raciRows.splice(idx,1)[0];
+  if(removed&&removed.row_id)deletedRaciRows.push({...removed,deleted:true});
+  renderRaciRows();saveRaciData();
+}
+function saveRaciData(showAlert=false){
+  try{localStorage.setItem(RACI_KEY,JSON.stringify(ensureRaciIds()));setSaveState('raciSaveState','Guardado local · '+nowTime());scheduleCloudSave();if(showAlert)alert('Matriz base cargada y enviada a Google Sheets.')}
+  catch(e){alert('No se pudo guardar localmente. Revisá permisos del navegador.')}
+}
+function loadRaciData(){
+  try{const saved=localStorage.getItem(RACI_KEY);raciRows=saved?JSON.parse(saved):[];ensureRaciIds();renderRaciRows()}
+  catch(e){raciRows=[];renderRaciRows()}
+}
+
+function exportRaciJson(){const payload={estacion:STATION_NAME,fecha_exportacion:new Date().toISOString(),raci:raciRows,notas_y_respuestas:collectSavedText()};downloadText(STATION_ID.toLowerCase()+'_raci_y_notas.json',JSON.stringify(payload,null,2),'application/json')}
+function exportRaciCsv(){const headers=['Actividad','R','A','C','I','Notas'];const rows=raciRows.map(r=>[r.actividad,r.r,r.a,r.c,r.i,r.notas]);const csv=[headers,...rows].map(cols=>cols.map(csvEscape).join(';')).join('\n');downloadText(STATION_ID.toLowerCase()+'_raci_editable.csv','\ufeff'+csv,'text/csv;charset=utf-8')}
+function exportAnswersJson(){const payload={estacion:STATION_NAME,fecha_exportacion:new Date().toISOString(),respuestas:collectAnswers()};downloadText(STATION_ID.toLowerCase()+'_incognitas_abiertas_respuestas.json',JSON.stringify(payload,null,2),'application/json')}
 function csvEscape(value){const v=String(value||'');return '"'+v.replace(/"/g,'""')+'"'}
 function downloadText(filename,text,type){const blob=new Blob([text],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url)}
-function setSaveState(id){const el=document.getElementById(id);if(!el)return;el.innerText='Guardado local · '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});setTimeout(()=>{el.innerText=''},2200)}
-function initAutosave(){document.querySelectorAll('[data-save-key]').forEach(el=>{const key=STORAGE_PREFIX+el.dataset.saveKey;const saved=localStorage.getItem(key);if(saved!==null)el.value=saved;el.addEventListener('input',()=>{localStorage.setItem(key,el.value);setSaveState(el.classList.contains('answer')?'answersSaveState':'raciSaveState')})})}
+function nowTime(){return new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'})}
+function setSaveState(id,message){const el=document.getElementById(id);if(!el)return;el.innerText=message||('Guardado · '+nowTime());clearTimeout(el._clearTimer);el._clearTimer=setTimeout(()=>{el.innerText=''},3600)}
+function setAnyState(message){setSaveState('raciSaveState',message);const ans=document.getElementById('answersSaveState');if(ans)ans.innerText=message}
+
+function initAutosave(){
+  document.querySelectorAll('[data-save-key]').forEach(el=>{
+    const key=STORAGE_PREFIX+el.dataset.saveKey;
+    const saved=localStorage.getItem(key);if(saved!==null)el.value=saved;
+    el.addEventListener('input',()=>{localStorage.setItem(key,el.value);setSaveState(el.classList.contains('answer')?'answersSaveState':'raciSaveState','Guardado local · '+nowTime());scheduleCloudSave()});
+  });
+}
 function collectSavedText(){const out={};document.querySelectorAll('[data-save-key]').forEach(el=>{out[el.dataset.saveKey]=el.value||''});return out}
 function collectAnswers(){const out=[];document.querySelectorAll('.question').forEach(q=>{const p=q.querySelector('p');const ta=q.querySelector('textarea');out.push({pregunta:p?p.innerText:'',respuesta:ta?ta.value:''})});return out}
-document.addEventListener('DOMContentLoaded',()=>{loadRaciData();initAutosave();const notes=document.getElementById('directorGeneralNotes');if(notes){notes.addEventListener('input',()=>setSaveState('raciSaveState'))}document.querySelectorAll('aside a').forEach(a=>{a.addEventListener('click',()=>{document.querySelectorAll('aside a').forEach(x=>x.classList.remove('active'));a.classList.add('active')})})});
+function getRecordLabel(el){
+  const directLabel=el.id?document.querySelector('label[for="'+el.id.replace(/"/g,'\\"')+'"]'):null;
+  if(directLabel)return directLabel.innerText.trim();
+  const question=el.closest('.question');if(question&&question.querySelector('p'))return question.querySelector('p').innerText.trim();
+  const area=el.closest('.notes-area,.gate-note');
+  const localLabel=area?area.querySelector('label,.note-label'):null;
+  const container=el.closest('.card,details,.question-group,.editable-panel,section');
+  const title=container?container.querySelector('h3,summary,h2'):null;
+  return [title?title.innerText.trim():'',localLabel?localLabel.innerText.trim():''].filter(Boolean).join(' · ')||el.dataset.saveKey;
+}
+function collectRecords(){
+  const records=[];
+  document.querySelectorAll('[data-save-key]').forEach(el=>{
+    const section=el.closest('section');
+    records.push({section:section?section.id:'general',item_id:el.dataset.saveKey,label:getRecordLabel(el),value:el.value||'',updated_by:''});
+  });
+  return records;
+}
+function applyRecords(records){
+  if(!Array.isArray(records))return;
+  records.forEach(item=>{
+    if(!item.item_id)return;
+    const el=document.querySelector('[data-save-key="'+String(item.item_id).replace(/"/g,'\\"')+'"]');
+    if(el){el.value=item.value||'';localStorage.setItem(STORAGE_PREFIX+item.item_id,item.value||'')}
+  });
+}
+function collectPayload(){
+  ensureRaciIds();
+  const activeRows=raciRows.map(row=>({row_id:row.row_id,actividad:row.actividad||'',r:row.r||'',a:row.a||'',c:row.c||'',i:row.i||'',notas:row.notas||'',deleted:false}));
+  return {action:'save',station:STATION_ID,records:collectRecords(),raci:[...activeRows,...deletedRaciRows]};
+}
+function scheduleCloudSave(){clearTimeout(cloudSaveTimer);cloudSaveTimer=setTimeout(()=>saveToGoogleNow(false),900)}
+function saveToGoogleNow(manual=false){
+  const form=new URLSearchParams();form.append('payload',JSON.stringify(collectPayload()));
+  setAnyState('Sincronizando Google Sheets...');
+  return fetch(GOOGLE_API_URL,{method:'POST',mode:'no-cors',body:form})
+    .then(()=>{setAnyState('Enviado a Google Sheets · '+nowTime());if(manual)alert('Datos enviados a Google Sheets.')})
+    .catch(err=>{console.error(err);setAnyState('No se pudo sincronizar con Google Sheets');if(manual)alert('No se pudo enviar a Google Sheets. Revisá la implementación del Apps Script.')});
+}
+function loadFromGoogle(manual=false){
+  setAnyState('Cargando desde Google Sheets...');
+  return new Promise((resolve,reject)=>{
+    const callbackName='frameworkCallback_'+STATION_ID+'_'+Date.now();
+    const script=document.createElement('script');
+    const cleanup=()=>{delete window[callbackName];script.remove();};
+    window[callbackName]=function(data){
+      cleanup();
+      if(!data||!data.ok){setAnyState('No se pudo cargar Google Sheets');if(manual)alert('No se pudo cargar Google Sheets.');reject(data);return;}
+      if(Array.isArray(data.records)&&data.records.length)applyRecords(data.records);
+      if(Array.isArray(data.raci)&&data.raci.length){raciRows=data.raci.map(row=>({row_id:row.row_id||createRowId('google'),actividad:row.actividad||'',r:row.r||'',a:row.a||'',c:row.c||'',i:row.i||'',notas:row.notas||'',deleted:false}));ensureRaciIds();localStorage.setItem(RACI_KEY,JSON.stringify(raciRows));renderRaciRows();}
+      const count=(data.records?data.records.length:0)+(data.raci?data.raci.length:0);
+      setAnyState(count?'Cargado desde Google Sheets · '+nowTime():'Google Sheets sin datos para esta estación');
+      if(manual)alert(count?'Datos cargados desde Google Sheets.':'Todavía no hay datos guardados para esta estación.');
+      resolve(data);
+    };
+    script.onerror=function(){cleanup();setAnyState('Error cargando Google Sheets');if(manual)alert('Error cargando Google Sheets.');reject(new Error('JSONP error'));};
+    script.src=GOOGLE_API_URL+'?action=load&station='+encodeURIComponent(STATION_ID)+'&callback='+encodeURIComponent(callbackName)+'&_='+Date.now();
+    document.body.appendChild(script);
+  });
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  loadRaciData();initAutosave();
+  document.querySelectorAll('aside a').forEach(a=>{a.addEventListener('click',()=>{document.querySelectorAll('aside a').forEach(x=>x.classList.remove('active'));a.classList.add('active')})});
+  loadFromGoogle(false).catch(()=>{});
+});
 </script>
 </body>
 </html>
