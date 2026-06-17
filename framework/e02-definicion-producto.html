@@ -103,7 +103,7 @@
     .question:first-of-type{border-top:0;padding-top:0;margin-top:0}
     .question p{color:#dbe2f1;margin-bottom:8px}
     .section-kicker{color:var(--muted);margin-top:-8px;margin-bottom:16px}
-    .print-only{display:none}
+    .editor-panel{margin-bottom:22px}.editor-panel .form-grid{grid-template-columns:repeat(2,minmax(0,1fr));margin:10px 0 0}.print-only{display:none}
     @media(max-width:900px){.form-grid{grid-template-columns:1fr}.editable-table{min-width:860px}}
     @media print{body{background:#fff;color:#111}aside,.toolbar,.right-tools,button{display:none!important}section,.card,.editable-panel,.question-group{box-shadow:none;border-color:#ccc;background:#fff;color:#111}.print-only{display:block}.field input,.field textarea,.editable-table input,.editable-table textarea,.note-box,.answer-box{border:0;background:#fff;color:#111;padding:0}td,p,ul{color:#333}th{background:#eee;color:#111}}
 </style>
@@ -131,6 +131,8 @@
 
 </aside>
 <main>
+<div class="editable-panel editor-panel"><h3>Identificación de edición</h3><p>Completá este campo para que Google Sheets registre quién hizo la última edición en <b>updated_by</b>. No es automático porque la página se ejecuta desde GitHub Pages.</p><div class="form-grid"><div class="field"><label for="editorName">Editor / responsable</label><input id="editorName" placeholder="Ej.: Nahuel / Eugenia / Dirección"></div><div class="field"><label>Estado de sincronización</label><span id="globalSaveState" class="save-state"></span></div></div></div>
+
 <section id="resumen">
 <h2>1. Resumen ejecutivo</h2>
 <div class="grid grid-4">
@@ -498,6 +500,22 @@ function createRowId(seed=''){return STATION_ID+'_row_'+Date.now()+'_'+Math.rand
 function ensureRaciIds(rows=raciRows){rows.forEach((row,idx)=>{if(!row.row_id)row.row_id=createRowId(idx)});return rows}
 function getBaseRaciRows(){return baseRaciRows.map((row,idx)=>({...row,row_id:row.row_id||STATION_ID+'_base_'+String(idx+1).padStart(2,'0'),deleted:false}))}
 
+function getEditorName(){
+  const el=document.getElementById('editorName');
+  const value=(el?el.value:localStorage.getItem(EDITOR_KEY)||'').trim();
+  return value || 'Sin identificar';
+}
+function initEditorName(){
+  const el=document.getElementById('editorName');
+  if(!el)return;
+  const saved=localStorage.getItem(EDITOR_KEY);
+  if(saved)el.value=saved;
+  el.addEventListener('input',()=>{
+    localStorage.setItem(EDITOR_KEY,el.value.trim());
+    setAnyState('Editor actualizado · '+nowTime());
+  });
+}
+
 function addRaciRow(){
   const row={row_id:createRowId('manual'),actividad:getVal('raciActividad'),r:getVal('raciR'),a:getVal('raciA'),c:getVal('raciC'),i:getVal('raciI'),notas:getVal('raciNotas'),deleted:false};
   if(!row.actividad){alert('Ingresá una actividad o decisión para agregarla al RACI.');return}
@@ -541,7 +559,7 @@ function csvEscape(value){const v=String(value||'');return '"'+v.replace(/"/g,'"
 function downloadText(filename,text,type){const blob=new Blob([text],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url)}
 function nowTime(){return new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'})}
 function setSaveState(id,message){const el=document.getElementById(id);if(!el)return;el.innerText=message||('Guardado · '+nowTime());clearTimeout(el._clearTimer);el._clearTimer=setTimeout(()=>{el.innerText=''},3600)}
-function setAnyState(message){setSaveState('raciSaveState',message);const ans=document.getElementById('answersSaveState');if(ans)ans.innerText=message}
+function setAnyState(message){setSaveState('globalSaveState',message);setSaveState('raciSaveState',message);const ans=document.getElementById('answersSaveState');if(ans)ans.innerText=message}
 
 function initAutosave(){
   document.querySelectorAll('[data-save-key]').forEach(el=>{
@@ -566,7 +584,7 @@ function collectRecords(){
   const records=[];
   document.querySelectorAll('[data-save-key]').forEach(el=>{
     const section=el.closest('section');
-    records.push({section:section?section.id:'general',item_id:el.dataset.saveKey,label:getRecordLabel(el),value:el.value||'',updated_by:''});
+    records.push({section:section?section.id:'general',item_id:el.dataset.saveKey,label:getRecordLabel(el),value:el.value||'',updated_by:getEditorName()});
   });
   return records;
 }
@@ -580,8 +598,10 @@ function applyRecords(records){
 }
 function collectPayload(){
   ensureRaciIds();
-  const activeRows=raciRows.map(row=>({row_id:row.row_id,actividad:row.actividad||'',r:row.r||'',a:row.a||'',c:row.c||'',i:row.i||'',notas:row.notas||'',deleted:false}));
-  return {action:'save',station:STATION_ID,records:collectRecords(),raci:[...activeRows,...deletedRaciRows]};
+  const editor=getEditorName();
+  const activeRows=raciRows.map(row=>({row_id:row.row_id,actividad:row.actividad||'',r:row.r||'',a:row.a||'',c:row.c||'',i:row.i||'',notas:row.notas||'',deleted:false,updated_by:editor}));
+  const deletedRows=deletedRaciRows.map(row=>({...row,updated_by:row.updated_by||editor}));
+  return {action:'save',station:STATION_ID,updated_by:editor,records:collectRecords(),raci:[...activeRows,...deletedRows]};
 }
 function scheduleCloudSave(){clearTimeout(cloudSaveTimer);cloudSaveTimer=setTimeout(()=>saveToGoogleNow(false),900)}
 function saveToGoogleNow(manual=false){
@@ -614,7 +634,7 @@ function loadFromGoogle(manual=false){
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
-  loadRaciData();initAutosave();
+  initEditorName();loadRaciData();initAutosave();
   document.querySelectorAll('aside a').forEach(a=>{a.addEventListener('click',()=>{document.querySelectorAll('aside a').forEach(x=>x.classList.remove('active'));a.classList.add('active')})});
   loadFromGoogle(false).catch(()=>{});
 });
