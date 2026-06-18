@@ -12,12 +12,13 @@
     main{padding:28px;max-width:980px;margin:0 auto}
     h1{margin:0 0 8px;font-size:30px}
     p{color:var(--muted)}
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:24px}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:24px}
     .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;text-decoration:none;color:var(--text);box-shadow:0 8px 24px rgba(0,0,0,.18)}
     .card:hover{background:var(--panel2);border-color:var(--violet)}
     .tag{display:inline-block;padding:4px 8px;border-radius:99px;font-size:12px;background:rgba(56,189,248,.13);color:#7dd3fc;margin-bottom:12px}
     .button{display:inline-block;margin-top:12px;background:var(--violet);color:white;padding:10px 12px;border-radius:10px}
     footer{padding:22px 32px;color:var(--muted);text-align:center;border-top:1px solid var(--line)}
+    @media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
     @media(max-width:760px){.grid{grid-template-columns:1fr}header,main{padding-left:20px;padding-right:20px}}
   </style>
 </head>
@@ -39,6 +40,12 @@
         <h2>Definición de Producto</h2>
         <p>Estación 02 · Producto inmobiliario conceptual validado.</p>
         <span class="button">Abrir E02</span>
+      </a>
+      <a class="card" href="./sdp-explorer-as-is.html">
+        <span class="tag">AS-IS</span>
+        <h2>SDP Explorer AS-IS</h2>
+        <p>Grafo con corredores · 98 nodos del proceso.</p>
+        <span class="button">Abrir Explorer</span>
       </a>
     </div>
   </main>
